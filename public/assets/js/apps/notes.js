@@ -68,7 +68,7 @@ $(document).ready(function() {
           $('#ct > div').not($el).hide();
         }
         $btns.removeClass('active');
-        $(this).addClass('active');  
+        $(this).addClass('active');
     })
 
     $('#btn-add-notes').on('click', function(event) {
@@ -152,29 +152,29 @@ var $_getValidationField = document.getElementsByClassName('validation-text');
 
 getNoteTitleInput = document.getElementById('n-title');
 
-getNoteTitleInput.addEventListener('input', function() {
-
-    getNoteTitleInputValue = this.value;
-
-    if (getNoteTitleInputValue == "") {
-      $_getValidationField[0].innerHTML = 'Title Required';
-      $_getValidationField[0].style.display = 'block';
-    } else {
-      $_getValidationField[0].style.display = 'none';
-    }
-})
+// getNoteTitleInput.addEventListener('input', function() {
+//
+//     getNoteTitleInputValue = this.value;
+//
+//     if (getNoteTitleInputValue == "") {
+//       $_getValidationField[0].innerHTML = 'Title Required';
+//       $_getValidationField[0].style.display = 'block';
+//     } else {
+//       $_getValidationField[0].style.display = 'none';
+//     }
+// })
 
 getNoteDescriptionInput = document.getElementById('n-description');
 
-getNoteDescriptionInput.addEventListener('input', function() {
-
-  getNoteDescriptionInputValue = this.value;
-
-  if (getNoteDescriptionInputValue == "") {
-    $_getValidationField[1].innerHTML = 'Description Required';
-    $_getValidationField[1].style.display = 'block';
-  } else {
-    $_getValidationField[1].style.display = 'none';
-  }
-
-})
+// getNoteDescriptionInput.addEventListener('input', function() {
+//
+//   getNoteDescriptionInputValue = this.value;
+//
+//   if (getNoteDescriptionInputValue == "") {
+//     $_getValidationField[1].innerHTML = 'Description Required';
+//     $_getValidationField[1].style.display = 'block';
+//   } else {
+//     $_getValidationField[1].style.display = 'none';
+//   }
+//
+// })
