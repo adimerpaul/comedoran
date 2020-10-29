@@ -25,6 +25,7 @@
     },
     "dependencies": {
         "boostrap": "^2.0.0",
+        "vue-image-upload-resize": "^2.3.0",
         "vue-moment": "^4.1.0",
         "vue-router": "^3.4.8",
         "vue-simple-alert": "^1.1.1",
