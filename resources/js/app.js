@@ -4,6 +4,10 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
+import vSelect from 'vue-select'
+import 'vue-select/dist/vue-select.css';
+Vue.component('v-select', vSelect)
+
 import VueSimpleAlert from "vue-simple-alert";
 import 'sweetalert2/src/sweetalert2.scss'
 Vue.use(VueSimpleAlert);

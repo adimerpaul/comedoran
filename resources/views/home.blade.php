@@ -856,11 +856,12 @@
         <!--  END SIDEBAR  -->
 
         <!--  BEGIN CONTENT AREA  -->
-        <div id="content" class="main-content" >
+        <div id="content" class="main-content"  >
 {{--            <div class="container">--}}
 
-                    <router-view></router-view>
-
+                    <router-view  ></router-view>
+{{--                </div>--}}
+{{--            </div>--}}
 {{--            </div>--}}
             <div class="footer-wrapper">
                 <div class="footer-section f-section-1">
