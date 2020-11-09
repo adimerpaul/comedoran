@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
     <!-- BEGIN PAGE LEVEL CUSTOM STYLES -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <link rel="stylesheet" href="//unpkg.com/leaflet/dist/leaflet.css" />
 </head>
 <body data-spy="scroll" data-target="#navSection" data-offset="100">
 <div id="app">
@@ -277,6 +278,19 @@
                                 </li>
                             </router-link>
                             <router-link
+                                to="/nuevo"
+                                v-slot="{ href, route, navigate, isActive }"
+                            >
+                                <li class="menu">
+                                    <a :href="href" v-bind:data-active="isActive" @click="navigate" class="dropdown-toggle">
+                                        <div class="">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-zap"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+                                            <span>Nuevos</span>
+                                        </div>
+                                    </a>
+                                </li>
+                            </router-link>
+                            <router-link
                                 to="/repostulante"
                                 v-slot="{ href, route, navigate, isActive }"
                             >
@@ -304,19 +318,7 @@
                                 </li>
                             </router-link>
 
-                            <router-link
-                                to="/nuevo"
-                                v-slot="{ href, route, navigate, isActive }"
-                            >
-                                <li class="menu">
-                                    <a :href="href" v-bind:data-active="isActive" @click="navigate" class="dropdown-toggle">
-                                        <div class="">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-zap"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
-                                            <span>Nuevos</span>
-                                        </div>
-                                    </a>
-                                </li>
-                            </router-link>
+
 
                     @endif
 
