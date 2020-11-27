@@ -34,5 +34,6 @@ Route::get('/comunicados', function () {
 
 Auth::routes();
 Route::apiResource('/comunicado',\App\Http\Controllers\ComunicadoController::class);
+Route::apiResource('/ficha',\App\Http\Controllers\FichaController::class);
 Route::get('/mostrar',[\App\Http\Controllers\ComunicadoController::class,'mostrar']);
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('auth');

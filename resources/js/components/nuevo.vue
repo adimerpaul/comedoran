@@ -12,7 +12,7 @@
                             </div>
                         </div>
                         <div class="widget-content widget-content-area" >
-                            <form class="simple-example">
+                            <form class="simple-example" @submit.prevent="updateAvatar">
                                 <div class="form-row">
                                     <div class="col-md-12">
                                         <h5>I. COMPRAR VALOR</h5>
@@ -49,34 +49,35 @@
 <!--          }}</span>-->
 <!--                                            </label>-->
 <!--                                        </image-uploader>-->
-                                        <input type="file" class="form-control">
+                                        <input type="file" class="form-control" @change="getImage">
+<!--                                        <button type="button" @click="updateAvatar">Subir Imagen</button>-->
                                         <h5>II. FICHA SOCIAL</h5>
                                         <small>La informacion que el estudiante proporcione en esta ficha debe ser veridica y confiable ya que la misma sera utilizada para la valoracion de la situacion socioeconomica del postulante. en caso de comprobarse falsedad en la informacion proporcionada, el DAE procedera a la suspencion de la Beca Comedor y se obligara al postulante a reponer el monto de dinero erogado por la Universidad a parti de la fecha  de su habilitacion como becario.                                        </small>
                                         <h6>1. DATOS DEL POSTULANTE</h6>
                                         <div class="form-row">
                                             <div class="form-group col-md-4">
                                                 <label for="Nombres">Nombres*</label>
-                                                <input type="text" class="form-control" id="Nombres" placeholder="Nombres" required>
+                                                <input type="text" v-model="dato.nombres" class="form-control" id="Nombres" placeholder="Nombres" required>
                                             </div>
                                             <div class="form-group col-md-4">
                                                 <label for="Apellido Parterno">Apellido Parterno*</label>
-                                                <input type="text" class="form-control" id="Apellido Parterno" placeholder="Apellido Parterno" required>
+                                                <input type="text" v-model="dato.paterno" class="form-control" id="Apellido Parterno" placeholder="Apellido Parterno" required>
                                             </div>
                                             <div class="form-group col-md-4">
                                                 <label for="Apellido Materno">Apellido Materno</label>
-                                                <input type="text" class="form-control" id="Apellido Materno" placeholder="Apellido Materno" required>
+                                                <input type="text"  v-model="dato.materno" class="form-control" id="Apellido Materno" placeholder="Apellido Materno" required>
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label for="Telefono">Telefono de referencia</label>
-                                                <input type="text" class="form-control" id="Telefono" placeholder="Telefono">
+                                                <input type="text"  v-model="dato.telefono" class="form-control" id="Telefono" placeholder="Telefono">
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label for="Celular">Celular*</label>
-                                                <input type="text" class="form-control" id="Celular" placeholder="Celular" required>
+                                                <input type="text"  v-model="dato.celular" class="form-control" id="Celular" placeholder="Celular" required>
                                             </div>
                                             <div class="form-group col-md-4">
                                                 <label for="Fecha ingreso UTO">Fecha ingreso UTO</label>
-                                                <input type="text" class="form-control" id="Fecha ingreso UTO" placeholder="Ingreso">
+                                                <input type="text"  v-model="dato.ingreso" class="form-control" id="Fecha ingreso UTO" placeholder="Ingreso">
                                                 <small id="emailHelp" class="form-text text-muted">Ej: semestre II/2020,14/01/2020</small>
                                             </div>
                                             <div class="form-group col-md-4">
@@ -94,13 +95,13 @@
                                             </div>
                                             <div class="form-group col-md-4">
                                                 <label >Carrera</label>
-                                                <select v-if="dato.facultad=='Facultad de Derecho Ciencias Politicas y Sociales'" name="Carrera"  class="form-control">
+                                                <select v-if="dato.facultad=='Facultad de Derecho Ciencias Politicas y Sociales'" v-model="dato.carrera" name="Carrera"  class="form-control">
                                                     <option value="Derecho">Derecho</option>
                                                     <option value="Comunicacion social">Comunicacion social</option>
                                                     <option value="Antropología">Antropología</option>
                                                     <option value="Psicologia">Psicologia</option>
                                                 </select>
-                                                <select v-if="dato.facultad=='Facultad Nacional de Ingeniería'" name="Carrera"  class="form-control">
+                                                <select v-if="dato.facultad=='Facultad Nacional de Ingeniería'" v-model="dato.carrera" name="Carrera"  class="form-control">
                                                     <option value="Ingeniería de Minas">Ingeniería de Minas</option>
                                                     <option value="Ingeniería Civil">Ingeniería Civil</option>
                                                     <option value="Ingeniería Metalúrgica">Ingeniería Metalúrgica</option>
@@ -111,7 +112,7 @@
                                                     <option value="Ingeniería de Sistemas">Ingeniería de Sistemas</option>
                                                     <option value="Ingeniería Industrial">Ingeniería Industrial</option>
                                                 </select>
-                                                <select v-if="dato.facultad=='Facultad de Ciencias Economicas Financieras y Administrativas'" name="Carrera"  class="form-control">
+                                                <select v-model="dato.carrera" v-if="dato.facultad=='Facultad de Ciencias Economicas Financieras y Administrativas'" name="Carrera"  class="form-control">
                                                     <option value="Economía">Economía</option>
                                                     <option value="Contaduría Publica">Contaduría Publica</option>
                                                     <option value="Administración de Empresas">Administración de Empresas</option>
@@ -119,7 +120,7 @@
                                                     <option value="Adminsitracion Financiera">Adminsitracion Financiera</option>
                                                     <option value="Comercio Internacional">Comercio Internacional</option>
                                                 </select>
-                                                <select v-if="dato.facultad=='Facultad de Ciencias Agrarias y Naturales'" name="Carrera"  class="form-control">
+                                                <select v-model="dato.carrera" v-if="dato.facultad=='Facultad de Ciencias Agrarias y Naturales'" name="Carrera"  class="form-control">
                                                     <option value="Ingeniería agronómica (Menciones: Fitotecnia,  Ganadería, Agronegocios  y Riegos y Suelos)">Ingeniería agronómica (Menciones: Fitotecnia,  Ganadería, Agronegocios  y Riegos y Suelos)</option>
                                                     <option value="Ingeniería en Zootécnica y Bienestar Animal">Ingeniería en Zootécnica y Bienestar Animal</option>
                                                     <option value="Ingeniería en Producción Agraria">Ingeniería en Producción Agraria</option>
@@ -127,7 +128,7 @@
                                                     <option value="Medicina Veterinaria y Zootécnia (Challapata)">Medicina Veterinaria y Zootécnia (Challapata)</option>
                                                     <option value="Ingeniería Agroindustrial">Ingeniería Agroindustrial</option>
                                                 </select>
-                                                <select v-if="dato.facultad=='Facultad Técnica'" name="Carrera"  class="form-control">
+                                                <select v-model="dato.carrera" v-if="dato.facultad=='Facultad Técnica'" name="Carrera"  class="form-control">
                                                     <option value="Construcciones Civiles">Construcciones Civiles</option>
                                                     <option value="Electricidad Industrial">Electricidad Industrial</option>
                                                     <option value="Mecanica Automotriz">Mecanica Automotriz</option>
@@ -136,10 +137,10 @@
                                                     <option value="Mantenimiento de Equipo Pesado">Mantenimiento de Equipo Pesado</option>
                                                     <option value="Electromecanica">Electromecanica</option>
                                                 </select>
-                                                <select v-if="dato.facultad=='Facultad de Arquitectura y Urbanismo'" name="Carrera"  class="form-control">
+                                                <select v-model="dato.carrera" v-if="dato.facultad=='Facultad de Arquitectura y Urbanismo'" name="Carrera"  class="form-control">
                                                     <option value="Arquitectura y Urbanismo">Arquitectura y Urbanismo</option>
                                                 </select>
-                                                <select v-if="dato.facultad=='Facultad de Ciencias de la Salud'" name="Carrera"  class="form-control">
+                                                <select v-model="dato.carrera" v-if="dato.facultad=='Facultad de Ciencias de la Salud'" name="Carrera"  class="form-control">
                                                     <option value="Enfermería Técnico">Enfermería Técnico</option>
                                                     <option value="Odontología">Odontología</option>
                                                     <option value="Medicina">Medicina</option>
@@ -150,19 +151,19 @@
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label for="Semestre">Semestre o año que cursa </label>
-                                                <input type="text" class="form-control" id="Semestre" placeholder="Semestre">
+                                                <input v-model="dato.semestre" type="text" class="form-control" id="Semestre" placeholder="Semestre">
                                                 <small class="form-text text-muted">Ej: Anuales: 1er Año, 2do Año, Semestrales: 1er semestre, 2do semestre</small>
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label >Usted tiene alguna discapacidad?</label>
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="radio" name="exampleRadios"  value="option1" checked>
-                                                    <label class="form-check-label" >
+                                                    <input class="form-check-input" v-model="dato.discapacidad" type="radio" name="exampleRadios"  value="option1" checked>
+                                                    <label class="form-check-label"  >
                                                         NO
                                                     </label>
                                                 </div>
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="radio" name="exampleRadios"  value="option2">
+                                                    <input class="form-check-input" v-model="dato.discapacidad" type="radio" name="exampleRadios"  value="option2">
                                                     <label class="form-check-label" >
                                                         SI
                                                     </label>
@@ -171,19 +172,19 @@
                                             <div class="form-group col-md-12">
                                                 <label >¿CUENTA CON HERMANO (AS) BECARIOS (AS) Y/O POSTULANTES A LA BECA COMEDOR?</label>
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="radio" name="hermano"  value="option1" checked>
+                                                    <input v-model="dato.hermanos" class="form-check-input" type="radio" name="hermano"  value="NO" checked required>
                                                     <label class="form-check-label" >
                                                         NO
                                                     </label>
                                                 </div>
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="radio" name="hermano"  value="option2">
+                                                    <input v-model="dato.hermanos" class="form-check-input" type="radio" name="hermano"  value="SI" required>
                                                     <label class="form-check-label" >
                                                         SI
                                                     </label>
                                                 </div>
                                             </div>
-                                            <div class="form-group col-md-12">
+                                            <div class="form-group col-md-12" v-if="dato.hermanos=='SI'">
                                                 <div class="table-responsive">
                                                     <table class="table">
                                                         <thead class="thead-dark">
@@ -443,11 +444,11 @@
                                             </div>
                                             <div class="form-group col-md-12">
                                                 <label >OTROS INGRESOS ECONÓMICOS CON QUE CUENTA LA FAMILIA (GRUPO FAMILIAR, INCLUYE INGRESOS DEL POSTULANTE)</label>
-                                                <textarea class="form-control" ></textarea>
+                                                <textarea v-model="dato.otros" class="form-control" ></textarea>
                                             </div>
                                             <div class="form-group col-md-12">
                                                 <label >OBSERVACIONES SOBRE DATOS PROPORCIONADOS EN LA FICHA SOCIAL:</label>
-                                                <textarea class="form-control" ></textarea>
+                                                <textarea v-model="dato.observacion" class="form-control" ></textarea>
                                             </div>
                                         </div>
                                         <h5>III. PAPELETA DE PAGO DE LA MATRICULA UNIVERSITARIA</h5>
@@ -455,12 +456,12 @@
                                             Se refiere a la Matricula Universitaria correspondiente a la gestion academica en curso. Se exigira  el docuemento original y una fotocopia  simple
                                             Entrega en :Departamento de Asuntos Estudiantiles
                                         </small>
-                                        <input type="file" class="form-control">
+                                        <input type="file" class="form-control" @change="getImage2">
                                         <h5>IV. HOJA DE CROQUIS DE LA VIVIENDA</h5>
                                         <small>
                                             El postulante debera identificar la avenidad, calle, pasaje, calles adyacentes donde esta ubicada su vivienda indicando ademas el numero de la vivienda, nombre del propietario. se debe refernciar la ubicacion con parques y plazas, paradas de transporte publico, reten policial, hospital, colegio, etc.
                                         </small>
-                                        <input type="file" class="form-control">
+                                        <input type="file" class="form-control" @change="getImage3">
                                         <div class="form-row">
                                             <div class="form-group col-md-4">
                                                 <label for="Direccion">Direccion*</label>
@@ -487,52 +488,52 @@
                                         <small>
                                             Original y una fotocopia simple
                                         </small>
-                                        <input type="file" class="form-control">
+                                        <input type="file" class="form-control" @change="getImage4">
                                         <h5>VI. LIBRETA DE CALIFICACIONES DEL SEXTO CURSO DE SECUNDARIA</h5>
                                         <small>
                                             Original y una fotocopia simple. en caso de no contar con la libreta, se puede presentar uno de los siguientes documentos: Certificado de conclusion de Estudio expedido por el colegio, Certificado de Estudio o certificacion del colegio (original y una  fotocopia simple).
                                         </small>
-                                        <input type="file" class="form-control">
+                                        <input type="file" class="form-control" @change="getImage5">
                                         <h5>VII. PAPELETA DE PAGO DEL ULTIMO MES DE UNO O AMBOS PROGENITORES</h5>
                                         <small>
                                             Original y una fotocopia simple  y cuando  uno o ambos progenitores sean trabajadores asalariados de alguna institucion.
                                         </small>
-                                        <input type="file" class="form-control">
+                                        <input type="file" class="form-control" @change="getImage6">
                                         <h5>VIII. CERTIFICADO DE LA ACTIVIDAD LABORAL</h5>
                                         <small>
                                             En caso de progenitores no asalariados. las certificaciones vaalidas son las siguientes: Agricultor (Certificado del corregir y/o autoridad originaria; Comerciante( Certificacion de su Sindicato o Asociacion, Padron Municipal, o Permiso de Funcionamiento o NIT); Chofer (Certificacion de su Sindicato, Asociacion u otro documento); Otra Actividad Independiente (Certificacon de su Junta Vecinal).
                                         </small>
-                                        <input type="file" class="form-control">
+                                        <input type="file" class="form-control" @change="getImage7">
                                         <h5>IX. CEDULA DE IDENTIDAD VIGENTE DE LOS PADRES O APODERADOS</h5>
                                         <small>
                                             Original y fotocopia simple.
                                         </small>
-                                        <input type="file" class="form-control">
+                                        <input type="file" class="form-control" @change="getImage8">
                                         <h5>X. LIBRETA DE FAMILIA</h5>
                                         <small>
                                             Original y fotocopia simple. en caso de no contar con la misma Certificados de nacimiento originales y fotocopia aimple vigentes y validos de los hermanos menores de 25 años, incluido el del postulante
                                         </small>
-                                        <input type="file" class="form-control">
+                                        <input type="file" class="form-control" @change="getImage9">
                                         <h5>XI. CERTIFICADO DE DEFUNCION</h5>
                                         <small>
                                             Original y fotocopia simple, en caso de orfandad.
                                         </small>
-                                        <input type="file" class="form-control">
+                                        <input type="file" class="form-control" @change="getImage10">
                                         <h5>XII. SENTENCIA DE DIVORCIO</h5>
                                         <small>
                                             Fotocopia simple en caso de orfandad. Son documentos equivalentes a una fotocopia legalizada de la demanda de Divorcio.
                                         </small>
-                                        <input type="file" class="form-control">
+                                        <input type="file" class="form-control" @change="getImage11">
                                         <h5>XIV. DENUNCIA ANTE EL MINISTERIO PUBLICO</h5>
                                         <small>
                                             En caso de abandono de uno o ambos apadres. o algun otro documento que demuestre fehacientemente esta situacion.
                                         </small>
-                                        <input type="file" class="form-control">
+                                        <input type="file" class="form-control" @change="getImage12">
                                         <h5>XV. CROQUIS DE LA VIVIENDA DE LA FAMILIA</h5>
                                         <small>
                                             es un requisito para los postulantes que provienen del interior del pais (ciudades y poblaciones rurales) Deben adjuntar ademas facturas de consumo de luz o agua del lugar de procedencia cuando corresponda.
                                         </small>
-                                        <input type="file" class="form-control">
+                                        <input type="file" class="form-control" @change="getImage13">
                                         <div style="height: 500px; width: 100%">
 <!--                                            <div style="height: 200px ;">-->
 <!--                                                <p>First marker is placed at {{ withPopup.lat }}, {{ withPopup.lng }}</p>-->
@@ -625,6 +626,7 @@
 </template>
 
 <script>
+    import  axios from "axios";
     import { latLng } from "leaflet";
     import { LMap, LTileLayer, LMarker, LPopup, LTooltip } from "vue2-leaflet";
     export default {
@@ -644,13 +646,27 @@
                 hasImage: false,
                 image: null,
                 dato:{},
+                nuevo:{},
+                valor:null,
+                valor2:null,
+                valor3:null,
+                valor4:null,
+                valor5:null,
+                valor6:null,
+                valor7:null,
+                valor8:null,
+                valor9:null,
+                valor10:null,
+                valor11:null,
+                valor12:null,
+                valor13:null,
                 options: [
                     'foo',
                     'bar',
                     'baz'
                 ],
-                hermanos:[{nombre:'',becario:'NO',postulante:'NO'}],
-                hermanos:[{nombre:'',parentesco:'NO',fechanac:'NO'}],
+                hermanos:[{nombre:'aa',becario:'NO',postulante:'NO'}],
+                // hermanos:[{nombre:'',parentesco:'NO',fechanac:'NO'}],
                 zoom: 13,
                 center: latLng(-17.973813, -67.115095),
                 url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -668,6 +684,68 @@
             };
         },
         methods: {
+            getImage(event){
+                this.valor = event.target.files[0];
+            },
+            getImage2(event){
+                this.valor2 = event.target.files[0];
+            },
+            getImage3(event){
+                this.valor3 = event.target.files[0];
+            },
+            getImage4(event){
+                this.valor4 = event.target.files[0];
+            },
+            getImage5(event){
+                this.valor5 = event.target.files[0];
+            },
+            getImage6(event){
+                this.valor6 = event.target.files[0];
+            },
+            getImage7(event){
+                this.valor7 = event.target.files[0];
+            },
+            getImage8(event){
+                this.valor8 = event.target.files[0];
+            },
+            getImage9(event){
+                this.valor9 = event.target.files[0];
+            },
+            getImage10(event){
+                this.valor10 = event.target.files[0];
+            },
+            getImage11(event){
+                this.valor11 = event.target.files[0];
+            },
+            getImage12(event){
+                this.valor12 = event.target.files[0];
+            },
+            getImage13(event){
+                this.valor13 = event.target.files[0];
+            },
+
+            updateAvatar(){
+                //Creamos el formData
+                var data = new  FormData();
+                //Añadimos la imagen seleccionada
+                // data.append('valor', this.valor);
+                // data.append('valor2', this.valor2);
+                // data.append('valor3', this.valor3);
+                // data.append('valor4', this.valor4);
+                // data.append('valor5', this.valor5);
+                // data.append('valor6', this.valor6);
+                // data.append('valor7', this.valor7);
+                // data.append('valor8', this.valor8);
+                // data.append('valor9', this.valor9);
+                // data.append('valor10', this.valor10);
+                // data.append('valor11', this.valor11);
+                // data.append('valor12', this.valor12);
+                // data.append('valor13', this.valor13);
+                data.append('hermanos', this.hermanos);
+                axios.post('/ficha',data).then(res => {
+                        console.log(res.data);
+                });
+            },
             addMarker(event) {
                 // this.markers.push(event.latlng);
                 this.marker= latLng(event.latlng)

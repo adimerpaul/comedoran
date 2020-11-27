@@ -35,7 +35,38 @@ class FichaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if ($request->hasFile('valor')) {
+            $path = $request->file('valor')->store('files');
+            return $path;
+        }
+
+//        $data = $request->all();
+//        foreach ($data as $key => $value) {
+//            echo $value;
+//        }
+
+//        return strlen($request->hermanos);
+//        foreach ( json_encode($request->hermanos)  as $row){
+//            echo $row->becario;
+//        }
+//        echo (json_encode($request->all()));
+//        exit;
+//        foreach ($request->hermanos as $row){
+//            echo $row;
+//        }
+
+        $array = array(1, 2, 3, array(4,2,4));
+//        foreach ($array as &$valor) {
+//            $valor = $valor * 2;
+//        }
+//        return  json_encode($request->all());
+//        return  $request->hermanos[0]->nombres;
+//        return ($request->hermanos->object);
+        return $request->hermanos;
+
+        if (count($request->json()->all())) {
+            return   $request->json()->all();
+        }
     }
 
     /**
