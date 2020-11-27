@@ -1,0 +1,5 @@
+1. Verificar para autenticar el ingreso de gmail
+2. Targeta -  cambiar a tarjeta
+3. Vehiculo puede salir cualquier dia
+4. Busqueda de personas obvservadas para borrar su estado.
+5. Reporte de observados

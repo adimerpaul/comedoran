@@ -37,3 +37,4 @@ Route::apiResource('/comunicado',\App\Http\Controllers\ComunicadoController::cla
 Route::apiResource('/ficha',\App\Http\Controllers\FichaController::class);
 Route::get('/mostrar',[\App\Http\Controllers\ComunicadoController::class,'mostrar']);
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('auth');
+Route::post('/guardar',[\App\Http\Controllers\FichaController::class,'guardar']);

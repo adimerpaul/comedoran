@@ -20,18 +20,21 @@ import VueToast from 'vue-toast-notification';
 import 'vue-toast-notification/dist/theme-default.css';
 import 'vue-toast-notification/dist/theme-sugar.css';
 Vue.use(VueToast);
-import home from './components/home';
-import repostulante from './components/repostulante';
-import comunicados from './components/comunicados';
-import nuevo from './components/nuevo';
+
 // const home = { template: '<div>home</div>' }
 import ImageUploader from 'vue-image-upload-resize'
 Vue.use(ImageUploader);
+import home from './components/home';
+import repostulante from './components/repostulante';
+import antiguo from './components/antiguo';
+import comunicados from './components/comunicados';
+import nuevo from './components/nuevo';
 
 const routes = [
     { path: '/home', component: home },
     { path: '/repostulante', component: repostulante },
     { path: '/comunicados', component: comunicados },
+    { path: '/antiguo', component: antiguo },
     { path: '/nuevo', component: nuevo },
 ]
 

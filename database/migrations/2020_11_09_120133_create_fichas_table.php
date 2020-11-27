@@ -24,7 +24,7 @@ class CreateFichasTable extends Migration
             $table->string('facultad')->nullable();
             $table->string('carrera')->nullable();
             $table->string('semestre')->nullable();
-            $table->string('descapacidad')->nullable();
+            $table->string('discapacidad')->nullable();
             $table->string('hermanos')->nullable();
             $table->string('otros')->nullable();
             $table->string('observacion')->nullable();

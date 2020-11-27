@@ -18,10 +18,13 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+
+    {{--    <link rel="stylesheet" href="//unpkg.com/leaflet/dist/leaflet.css" />--}}
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-dark bg-primary shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
 {{--                    {{ config('app.name', 'Laravel') }}--}}
@@ -34,7 +37,30 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-
+                        <router-link
+                            to="/antiguo"
+                            v-slot="{ href, route, navigate, isActive }"
+                        >
+                            <li class="nav-item " v-bind:data-active="isActive">
+                                <a :href="href"  @click="navigate"  class="nav-link" href="Nuevos">Postulante Antiguo</a>
+                            </li>
+                        </router-link>
+                        <router-link
+                            to="/nuevo"
+                            v-slot="{ href, route, navigate, isActive }"
+                        >
+                            <li class="nav-item " v-bind:data-active="isActive">
+                                <a :href="href"  @click="navigate"  class="nav-link" href="Nuevos">Postulante Nuevo</a>
+                            </li>
+                        </router-link>
+                        <router-link
+                            to="/repostulante"
+                            v-slot="{ href, route, navigate, isActive }"
+                        >
+                            <li class="nav-item " v-bind:data-active="isActive">
+                                <a :href="href"  @click="navigate"  class="nav-link" href="Nuevos">Repostulante</a>
+                            </li>
+                        </router-link>
                     </ul>
 
                     <!-- Right Side Of Navbar -->

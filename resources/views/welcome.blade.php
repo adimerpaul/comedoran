@@ -77,8 +77,31 @@
                             <a class="dropdown-item" href="">Organigrama</a>
                         </div>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="">Becas</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Becas
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="">Beca Comedor - Casos Críticos</a>
+                            <a class="dropdown-item" href="home">- Postulante Antiguo</a>
+                            <a class="dropdown-item" href="home">- Postulante Nuevos</a>
+                            <a class="dropdown-item" href="home">- Repostulante</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="">Beca Comedor – Deportistas Sobresalientes</a>
+                            <a class="dropdown-item" href="home">- Postulante Nuevos</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="">Beca Comedor – Coperos</a>
+                            <a class="dropdown-item" href="home">- Postulante Nuevos</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="">Beca Comedor – Representantes Estudiantiles</a>
+                            <a class="dropdown-item" href="home">- Postulante Nuevos</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="">Beca Comedor - Convenio</a>
+                            <a class="dropdown-item" href="home">- Postulante Antiguo</a>
+                            <a class="dropdown-item" href="home">- Postulante Nuevos</a>
+                            <a class="dropdown-item" href="home">- Repostulante</a>
+{{--                            <div class="dropdown-divider"></div>--}}
+                        </div>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="">Contactenos</a>
