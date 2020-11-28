@@ -28,6 +28,7 @@ class CreateNuevosTable extends Migration
             $table->string('divocio')->nullable();
             $table->string('denuncia')->nullable();
             $table->string('viviendafamiliar')->nullable();
+            $table->string('semestre')->nullable();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
