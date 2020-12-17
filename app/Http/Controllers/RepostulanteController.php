@@ -4,11 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Antiguo;
 use App\Models\Gestion;
-use App\Models\Nuevo;
+use App\Models\Repostulante;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class AntiguoController extends Controller
+class RepostulanteController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -38,21 +38,19 @@ class AntiguoController extends Controller
      */
     public function store(Request $request)
     {
-//        return "a";
-//        exit;
         $g=Gestion::where('inicio','<=',date('Y-m-d'))->where('fin','>=',date('Y-m-d'))->where('tipo','ANTIGUOS')->first();
         if ($request->hasFile('valor'))$valor = $request->file('valor')->store('files'); else $valor="";
-        if ($request->hasFile('renovacion'))$renovacion = $request->file('renovacion')->store('files'); else $renovacion="";
+        if ($request->hasFile('ficha'))$ficha = $request->file('ficha')->store('files'); else $ficha="";
+        if ($request->hasFile('matricula'))$matricula = $request->file('matricula')->store('files'); else $matricula="";
         if ($request->hasFile('pago'))$pago = $request->file('pago')->store('files'); else $pago="";
-        if ($request->hasFile('actualizacion'))$actualizacion = $request->file('actualizacion')->store('files'); else $actualizacion="";
-        if ($request->hasFile('certificacion'))$certificacion = $request->file('certificacion')->store('files'); else $certificacion="";
+        if ($request->hasFile('certificado'))$certificado = $request->file('certificado')->store('files'); else $certificado="";
 
-        $d=new Antiguo();
+        $d=new Repostulante();
         $d->valor=$valor;
-        $d->renovacion=$renovacion;
+        $d->ficha=$ficha;
+        $d->matricula=$matricula;
         $d->pago=$pago;
-        $d->actualizacion=$actualizacion;
-        $d->certificacion=$certificacion;
+        $d->certificado=$certificado;
         $d->user_id=Auth::user()->id;
         $d->gestion_id=$g->id;
         $d->save();
@@ -62,10 +60,10 @@ class AntiguoController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Antiguo  $antiguo
+     * @param  \App\Models\Repostulante  $repostulante
      * @return \Illuminate\Http\Response
      */
-    public function show(Antiguo $antiguo)
+    public function show(Repostulante $repostulante)
     {
         //
     }
@@ -73,10 +71,10 @@ class AntiguoController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Antiguo  $antiguo
+     * @param  \App\Models\Repostulante  $repostulante
      * @return \Illuminate\Http\Response
      */
-    public function edit(Antiguo $antiguo)
+    public function edit(Repostulante $repostulante)
     {
         //
     }
@@ -85,10 +83,10 @@ class AntiguoController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Antiguo  $antiguo
+     * @param  \App\Models\Repostulante  $repostulante
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Antiguo $antiguo)
+    public function update(Request $request, Repostulante $repostulante)
     {
         //
     }
@@ -96,10 +94,10 @@ class AntiguoController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Antiguo  $antiguo
+     * @param  \App\Models\Repostulante  $repostulante
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Antiguo $antiguo)
+    public function destroy(Repostulante $repostulante)
     {
         //
     }

@@ -37,30 +37,50 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-                        <router-link
-                            to="/antiguo"
-                            v-slot="{ href, route, navigate, isActive }"
-                        >
-                            <li class="nav-item " v-bind:data-active="isActive">
-                                <a :href="href"  @click="navigate"  class="nav-link" href="Nuevos">Postulante Antiguo</a>
-                            </li>
-                        </router-link>
-                        <router-link
-                            to="/nuevo"
-                            v-slot="{ href, route, navigate, isActive }"
-                        >
-                            <li class="nav-item " v-bind:data-active="isActive">
-                                <a :href="href"  @click="navigate"  class="nav-link" href="Nuevos">Postulante Nuevo</a>
-                            </li>
-                        </router-link>
-                        <router-link
-                            to="/repostulante"
-                            v-slot="{ href, route, navigate, isActive }"
-                        >
-                            <li class="nav-item " v-bind:data-active="isActive">
-                                <a :href="href"  @click="navigate"  class="nav-link" href="Nuevos">Repostulante</a>
-                            </li>
-                        </router-link>
+                        @if(Auth::user()->tipo=='ADMIN')
+                            <router-link
+                                to="/gestiones"
+                                v-slot="{ href, route, navigate, isActive }"
+                            >
+                                <li class="nav-item " v-bind:data-active="isActive">
+                                    <a :href="href"  @click="navigate"  class="nav-link" href="Nuevos">Gestiones</a>
+                                </li>
+                            </router-link>
+                            <router-link
+                                to="/registros"
+                                v-slot="{ href, route, navigate, isActive }"
+                            >
+                                <li class="nav-item " v-bind:data-active="isActive">
+                                    <a :href="href"  @click="navigate"  class="nav-link" href="Nuevos">Registros</a>
+                                </li>
+                            </router-link>
+                        @else
+                            <router-link
+                                to="/antiguo"
+                                v-slot="{ href, route, navigate, isActive }"
+                            >
+                                <li class="nav-item " v-bind:data-active="isActive">
+                                    <a :href="href"  @click="navigate"  class="nav-link" href="Nuevos">Postulante Antiguo</a>
+                                </li>
+                            </router-link>
+                            <router-link
+                                to="/nuevo"
+                                v-slot="{ href, route, navigate, isActive }"
+                            >
+                                <li class="nav-item " v-bind:data-active="isActive">
+                                    <a :href="href"  @click="navigate"  class="nav-link" href="Nuevos">Postulante Nuevo</a>
+                                </li>
+                            </router-link>
+                            <router-link
+                                to="/repostulantes"
+                                v-slot="{ href, route, navigate, isActive }"
+                            >
+                                <li class="nav-item " v-bind:data-active="isActive">
+                                    <a :href="href"  @click="navigate"  class="nav-link" href="Nuevos">Repostulante</a>
+                                </li>
+                            </router-link>
+                        @endif
+
                     </ul>
 
                     <!-- Right Side Of Navbar -->

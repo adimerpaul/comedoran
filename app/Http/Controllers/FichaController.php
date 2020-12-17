@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Economica;
 use App\Models\Familia;
 use App\Models\Ficha;
+use App\Models\Gestion;
 use App\Models\Hermano;
 use App\Models\Nuevo;
 use Illuminate\Http\Request;
@@ -40,6 +41,11 @@ class FichaController extends Controller
      */
     public function store(Request $request)
     {
+//        $g=Gestion::whereBetween( date('Y-m-d'),['inicio','fin'])->get();
+    $g=Gestion::where('inicio','<=',date('Y-m-d'))->where('fin','>=',date('Y-m-d'))->where('tipo','NUEVOS')->first();
+//        echo $g->id;
+//        exit;
+
         if ($request->hasFile('valor'))$valor = $request->file('valor')->store('files'); else $valor="";
         if ($request->hasFile('matricula'))$matricula = $request->file('matricula')->store('files'); else $matricula="";
         if ($request->hasFile('vivienda'))$vivienda = $request->file('vivienda')->store('files'); else $vivienda="";
@@ -55,6 +61,8 @@ class FichaController extends Controller
         if ($request->hasFile('viviendafamiliar'))$viviendafamiliar = $request->file('viviendafamiliar')->store('files'); else $viviendafamiliar="";
 
         $d=new Nuevo();
+
+
         $d->valor=$valor;
         $d->matricula=$matricula;
         $d->vivienda=$vivienda;
@@ -67,12 +75,17 @@ class FichaController extends Controller
         $d->defuncion=$defuncion;
         $d->divocio=$divocio;
         $d->denuncia=$denuncia;
+        $d->gestion_id=$g->id;
+
+
         $d->viviendafamiliar=$viviendafamiliar;
         $d->user_id=Auth::user()->id;
+
         $d->save();
 
-
-        $f=new Ficha();
+//        return $d;
+//        exit;
+         $f=new Ficha();
         $f->nombres=$request->nombres;
         $f->paterno=$request->paterno;
         $f->materno=$request->materno;
@@ -132,8 +145,8 @@ class FichaController extends Controller
 
     }
     function guardar(Request $request){
-
-//        return $request->economicas;
+//    exit;
+//        return $request->hermanos;
 //        exit;
         foreach ($request->hermanos as $row){
             $h=new Hermano();

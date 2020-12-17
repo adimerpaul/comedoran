@@ -25,17 +25,21 @@ Vue.use(VueToast);
 import ImageUploader from 'vue-image-upload-resize'
 Vue.use(ImageUploader);
 import home from './components/home';
-import repostulante from './components/repostulante';
+import repostulantes from './components/repostulante';
 import antiguo from './components/antiguo';
 import comunicados from './components/comunicados';
 import nuevo from './components/nuevo';
+import gestiones from './components/gestiones';
+import registros from './components/registros';
 
 const routes = [
     { path: '/home', component: home },
-    { path: '/repostulante', component: repostulante },
+    { path: '/gestiones', component: gestiones },
+    { path: '/repostulantes', component: repostulantes },
     { path: '/comunicados', component: comunicados },
     { path: '/antiguo', component: antiguo },
     { path: '/nuevo', component: nuevo },
+    { path: '/registros', component: registros },
 ]
 
 const router = new VueRouter({

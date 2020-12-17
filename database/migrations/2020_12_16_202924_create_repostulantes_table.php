@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAntiguosTable extends Migration
+class CreateRepostulantesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,14 @@ class CreateAntiguosTable extends Migration
      */
     public function up()
     {
-        Schema::create('antiguos', function (Blueprint $table) {
+        Schema::create('repostulantes', function (Blueprint $table) {
             $table->id();
             $table->string('valor');
-            $table->string('renovacion');
+            $table->string('ficha');
+            $table->string('matricula');
+//            $table->string('pago');
             $table->string('pago');
-            $table->string('actualizacion');
-            $table->string('certificacion');
-            $table->string('semestre')->nullable();
+            $table->string('certificado')->nullable();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
             $table->unsignedBigInteger('gestion_id');
@@ -36,6 +36,6 @@ class CreateAntiguosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('antiguos');
+        Schema::dropIfExists('repostulantes');
     }
 }

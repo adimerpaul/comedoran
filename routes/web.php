@@ -19,7 +19,7 @@ Route::get('/', function () {
 Route::get('/home', function () {
     return view('home');
 })->middleware('auth');
-Route::get('/repostulante', function () {
+Route::get('/repostulantes', function () {
     return view('home');
 })->middleware('auth');
 Route::get('/antiguo', function () {
@@ -31,10 +31,18 @@ Route::get('/nuevo', function () {
 Route::get('/comunicados', function () {
     return view('home');
 })->middleware('auth');
+Route::get('/gestiones', function () {
+    return view('home');
+})->middleware('auth');
+Route::get('/registros', function () {
+    return view('home');
+})->middleware('auth');
 
 Auth::routes();
 Route::apiResource('/comunicado',\App\Http\Controllers\ComunicadoController::class);
+Route::apiResource('/repostulante',\App\Http\Controllers\RepostulanteController::class);
 Route::apiResource('/ficha',\App\Http\Controllers\FichaController::class);
+Route::apiResource('/gestion',\App\Http\Controllers\GestionController::class);
 Route::get('/mostrar',[\App\Http\Controllers\ComunicadoController::class,'mostrar']);
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('auth');
 Route::post('/guardar',[\App\Http\Controllers\FichaController::class,'guardar']);

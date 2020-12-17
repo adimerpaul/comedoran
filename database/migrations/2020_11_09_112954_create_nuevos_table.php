@@ -31,6 +31,8 @@ class CreateNuevosTable extends Migration
             $table->string('semestre')->nullable();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
+            $table->unsignedBigInteger('gestion_id');
+            $table->foreign('gestion_id')->references('id')->on('gestions');
             $table->timestamps();
         });
     }

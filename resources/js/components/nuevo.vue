@@ -1,7 +1,12 @@
 <template>
     <div class="container">
-        <div class="row " >
-            <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-12" v-if="gestions.length==0">
+                <h4 class="p-1 mb-1 bg-danger text-white text-center">
+                    No esta habilitado ninguna gestion
+                </h4>
+            </div>
+            <div class="col-md-12" v-else>
                 <div class="row layout-top-spacing" >
                     <div id="basic" class="col-lg-12 layout-spacing">
                         <div class="statbox widget box box-shadow">
@@ -303,7 +308,7 @@
                                                             </tr>
                                                             </tbody>
                                                         </table>
-                                                        {{hermanos}}
+<!--                                                        {{hermanos}}-->
                                                     </div>
                                                 </div>
                                                 <div class="form-group col-md-12">
@@ -484,7 +489,7 @@
                                                 </div>
                                                 <div class="form-group col-md-4">
                                                     <label for="Barrio">Propietario de la vivienda*</label>
-                                                    <input type="text" class="form-control" id="Barrio" placeholder="Vivienda" required>
+                                                    <input type="text" class="form-control" id="Vivienda" placeholder="Vivienda" required>
                                                 </div>
                                             </div>
                                             <h5>V. CEDULA DE IDENTIDAD VIGENTE DEL POSTULANTE</h5>
@@ -632,11 +637,23 @@
 
 <script>
     import  axios from "axios";
+    import moment from 'moment'
+
     // import { latLng } from "leaflet";
     // import { LMap, LTileLayer, LMarker, LPopup, LTooltip } from "vue2-leaflet";
     export default {
         mounted() {
             console.log('Component mounted.')
+            axios.get('/gestion').then(res=>{
+                // this.gestions=res.data;
+                // console.log(res.data);
+                res.data.forEach(r=>{
+                    if( moment().isBetween(r.inicio, r.fin) && r.tipo=='NUEVOS'){
+                        this.gestions.push(r);
+                    }
+                });
+
+            })
         },
     // components: {
     //     LMap,
@@ -647,6 +664,7 @@
     // },
         data() {
             return {
+                gestions:[],
                 msg: "Vue Image Upload and Resize Demo",
                 hasImage: false,
                 image: null,
@@ -693,6 +711,22 @@
         methods: {
             getImage(event){
                 this.valor = event.target.files[0];
+                // this.valor2 = event.target.files[0];
+                // this.valor3 = event.target.files[0];
+                // this.valor4 = event.target.files[0];
+                // this.valor5 = event.target.files[0];
+                // this.valor6 = event.target.files[0];
+                // this.valor7 = event.target.files[0];
+                // this.valor8 = event.target.files[0];
+                // this.valor9 = event.target.files[0];
+                // this.valor10 = event.target.files[0];
+                // this.valor11 = event.target.files[0];
+                // this.valor12 = event.target.files[0];
+                // this.valor13 = event.target.files[0];
+                // this.valor = event.target.files[0];
+
+
+
             },
             getImage2(event){
                 this.valor2 = event.target.files[0];
@@ -747,8 +781,7 @@
                 data.append('defuncion', this.valor10);
                 data.append('divocio', this.valor11);
                 data.append('denuncia', this.valor12);
-                data.append('vivendafamiliar', this.valor13);
-
+                data.append('viviendafamiliar', this.valor13);
 
                 data.append('nombres', this.dato.nombres);
                 data.append('paterno', this.dato.paterno);
@@ -773,11 +806,12 @@
 
 
 
-
+                // return false;
 
                 axios.post('/ficha',data).then(res => {
                     // console.log(res.data);
-                    // this.dato.ficha_id=res.data.id;
+                    // return false;
+                    this.dato.ficha_id=res.data.id;
                     axios.post('/guardar', {
                         hermanos:this.hermanos,
                         familias:this.familias,

@@ -1,7 +1,12 @@
 <template>
     <div class="container">
         <div class="row " >
-            <div class="col-md-12">
+            <div class="col-md-12" v-if="gestions.length==0">
+                <h4 class="p-1 mb-1 bg-danger text-white text-center">
+                    No esta habilitado ninguna gestion
+                </h4>
+            </div>
+            <div class="col-md-12" v-else>
                 <div class="row layout-top-spacing" >
                     <div id="basic" class="col-lg-12 layout-spacing">
                         <div class="statbox widget box box-shadow">
@@ -89,11 +94,22 @@
 
 <script>
 import  axios from "axios";
+import moment from "moment";
 // import { latLng } from "leaflet";
 // import { LMap, LTileLayer, LMarker, LPopup, LTooltip } from "vue2-leaflet";
 export default {
     mounted() {
         console.log('Component mounted.')
+        axios.get('/gestion').then(res=>{
+            // this.gestions=res.data;
+            // console.log(res.data);
+            res.data.forEach(r=>{
+                if( moment().isBetween(r.inicio, r.fin) && r.tipo=='ANTIGUOS'){
+                    this.gestions.push(r);
+                }
+            });
+
+        })
     },
     // components: {
     //     LMap,
@@ -104,6 +120,7 @@ export default {
     // },
     data() {
         return {
+            gestions:[],
             msg: "Vue Image Upload and Resize Demo",
             hasImage: false,
             image: null,
@@ -150,6 +167,10 @@ export default {
     methods: {
         getImage(event){
             this.valor = event.target.files[0];
+            // this.valor2 = event.target.files[0];
+            // this.valor3 = event.target.files[0];
+            // this.valor4 = event.target.files[0];
+            // this.valor5 = event.target.files[0];
         },
         getImage2(event){
             this.valor2 = event.target.files[0];
