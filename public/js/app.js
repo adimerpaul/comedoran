@@ -3701,11 +3701,12 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     var _this = this;
 
-    console.log('Component mounted.');
+    // console.log('Component mounted.')
     axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/gestion').then(function (res) {
       // this.gestions=res.data;
       // console.log(res.data);
       res.data.forEach(function (r) {
+        // console.log(r);
         if (moment__WEBPACK_IMPORTED_MODULE_1___default()().isBetween(r.inicio, r.fin) && r.tipo == 'NUEVOS') {
           _this.gestions.push(r);
         }
@@ -3872,6 +3873,21 @@ __webpack_require__.r(__webpack_exports__);
           ficha_id: res.data.id
         }).then(function (r) {
           console.log(r);
+
+          _this2.$toast.open({
+            message: "Datos Enviados",
+            type: "success",
+            duration: 3000,
+            dismissible: true
+          });
+        })["catch"](function (e) {
+          // console.log('')
+          _this2.$toast.open({
+            message: "Porfavor Verifique datos",
+            type: "error",
+            duration: 3000,
+            dismissible: true
+          });
         });
       });
     },
@@ -84141,7 +84157,7 @@ var render = function() {
               { staticClass: "p-1 mb-1 bg-danger text-white text-center" },
               [
                 _vm._v(
-                  "\n                No esta habilitado ninguna gestion\n            "
+                  "\n                No esta habilitado ninguna gestion para ANTIGUOS\n            "
                 )
               ]
             )
@@ -85572,8 +85588,8 @@ var render = function() {
                                           [
                                             _c(
                                               "option",
-                                              { attrs: { value: "NUEVO" } },
-                                              [_vm._v("NUEVO")]
+                                              { attrs: { value: "NUEVOS" } },
+                                              [_vm._v("NUEVOS")]
                                             ),
                                             _vm._v(" "),
                                             _c(
@@ -85819,8 +85835,10 @@ var render = function() {
                                               [
                                                 _c(
                                                   "option",
-                                                  { attrs: { value: "NUEVO" } },
-                                                  [_vm._v("NUEVO")]
+                                                  {
+                                                    attrs: { value: "NUEVOS" }
+                                                  },
+                                                  [_vm._v("NUEVOS")]
                                                 ),
                                                 _vm._v(" "),
                                                 _c(
@@ -86466,7 +86484,7 @@ var render = function() {
               { staticClass: "p-1 mb-1 bg-danger text-white text-center" },
               [
                 _vm._v(
-                  "\n                    No esta habilitado ninguna gestion\n                "
+                  "\n                    No esta habilitado ninguna gestion para NUEVOS\n                "
                 )
               ]
             )
@@ -92511,7 +92529,7 @@ var render = function() {
               { staticClass: "p-1 mb-1 bg-danger text-white text-center" },
               [
                 _vm._v(
-                  "\n                No esta habilitado ninguna gestion\n            "
+                  "\n                No esta habilitado ninguna gestion para REPOSTULANTES\n            "
                 )
               ]
             )
@@ -113972,7 +113990,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_comunicados__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/comunicados */ "./resources/js/components/comunicados.vue");
 /* harmony import */ var _components_nuevo__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/nuevo */ "./resources/js/components/nuevo.vue");
 /* harmony import */ var _components_gestiones__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./components/gestiones */ "./resources/js/components/gestiones.vue");
-/* harmony import */ var _components_registros__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./components/registros */ "./resources/js/components/registros.vue");
+/* harmony import */ var _components_registros__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./components/registros */ "./resources/js/components/registros.vue");
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 
@@ -114020,7 +114038,7 @@ var routes = [{
   component: _components_nuevo__WEBPACK_IMPORTED_MODULE_14__["default"]
 }, {
   path: '/registros',
-  component: _components_registros__WEBPACK_IMPORTED_MODULE_17__["default"]
+  component: _components_registros__WEBPACK_IMPORTED_MODULE_16__["default"]
 }];
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
   mode: 'history',

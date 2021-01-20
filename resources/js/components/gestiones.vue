@@ -34,7 +34,7 @@
                                                             <label for="tipo" >Tipo</label>
 <!--                                                            <input id="tipo" type="text" name="txt" v-model="dato.tipo" placeholder="Tipo" class="form-control" required="">-->
                                                             <select name="tipo" id="tipo" class="form-control" v-model="dato.tipo">
-                                                                <option value="NUEVO">NUEVO</option>
+                                                                <option value="NUEVOS">NUEVOS</option>
                                                                 <option value="ANTIGUO">ANTIGUO</option>
                                                                 <option value="REPOSTULANTE">REPOSTULANTE</option>
                                                             </select>
@@ -83,7 +83,7 @@
                                                                 <label for="tipo2" >Tipo</label>
 <!--                                                                <input id="tipo2" type="text" name="txt" v-model="dato.tipo" placeholder="Tipo" class="form-control" required="">-->
                                                                 <select name="tipo" id="tipo2" class="form-control" v-model="dato.tipo">
-                                                                    <option value="NUEVO">NUEVO</option>
+                                                                    <option value="NUEVOS">NUEVOS</option>
                                                                     <option value="ANTIGUO">ANTIGUO</option>
                                                                     <option value="REPOSTULANTE">REPOSTULANTE</option>
                                                                 </select>

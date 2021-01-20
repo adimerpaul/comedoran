@@ -45,7 +45,7 @@ class FichaController extends Controller
     $g=Gestion::where('inicio','<=',date('Y-m-d'))->where('fin','>=',date('Y-m-d'))->where('tipo','NUEVOS')->first();
 //        echo $g->id;
 //        exit;
-
+        $familiar='';
         if ($request->hasFile('valor'))$valor = $request->file('valor')->store('files'); else $valor="";
         if ($request->hasFile('matricula'))$matricula = $request->file('matricula')->store('files'); else $matricula="";
         if ($request->hasFile('vivienda'))$vivienda = $request->file('vivienda')->store('files'); else $vivienda="";

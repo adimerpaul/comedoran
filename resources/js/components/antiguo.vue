@@ -3,7 +3,7 @@
         <div class="row " >
             <div class="col-md-12" v-if="gestions.length==0">
                 <h4 class="p-1 mb-1 bg-danger text-white text-center">
-                    No esta habilitado ninguna gestion
+                    No esta habilitado ninguna gestion para ANTIGUOS
                 </h4>
             </div>
             <div class="col-md-12" v-else>

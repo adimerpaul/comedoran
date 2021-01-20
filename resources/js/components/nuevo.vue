@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-md-12" v-if="gestions.length==0">
                 <h4 class="p-1 mb-1 bg-danger text-white text-center">
-                    No esta habilitado ninguna gestion
+                    No esta habilitado ninguna gestion para NUEVOS
                 </h4>
             </div>
             <div class="col-md-12" v-else>
@@ -643,13 +643,15 @@
     // import { LMap, LTileLayer, LMarker, LPopup, LTooltip } from "vue2-leaflet";
     export default {
         mounted() {
-            console.log('Component mounted.')
+            // console.log('Component mounted.')
             axios.get('/gestion').then(res=>{
                 // this.gestions=res.data;
                 // console.log(res.data);
                 res.data.forEach(r=>{
+                    // console.log(r);
                     if( moment().isBetween(r.inicio, r.fin) && r.tipo=='NUEVOS'){
                         this.gestions.push(r);
+
                     }
                 });
 
@@ -796,16 +798,9 @@
                 data.append('hermanos', this.dato.hermanos);
                 data.append('otros', this.dato.otros);
                 data.append('observacion', this.dato.observacion);
-
                 data.append('hermanos', this.hermanos);
-
                 data.append('familia', this.familias);
-
                 data.append('economicas', this.economicas);
-
-
-
-
                 // return false;
 
                 axios.post('/ficha',data).then(res => {
@@ -819,6 +814,21 @@
                         ficha_id:res.data.id
                     }).then(r=>{
                         console.log(r);
+                        this.$toast.open({
+                            message: "Datos Enviados",
+                            type: "success",
+                            duration: 3000,
+                            dismissible: true
+                        });
+                    }).catch(e=>{
+                        // console.log('')
+                        this.$toast.open({
+                            message: "Porfavor Verifique datos",
+                            type: "error",
+                            duration: 3000,
+                            dismissible: true
+                        });
+
                     })
                 });
             },
