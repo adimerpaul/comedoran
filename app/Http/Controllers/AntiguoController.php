@@ -65,9 +65,9 @@ class AntiguoController extends Controller
      * @param  \App\Models\Antiguo  $antiguo
      * @return \Illuminate\Http\Response
      */
-    public function show(Antiguo $antiguo)
+    public function show($gestion_id)
     {
-        //
+        return Antiguo::where('gestion_id',$gestion_id)->get();
     }
 
     /**

@@ -35,8 +35,8 @@
 <!--                                                            <input id="tipo" type="text" name="txt" v-model="dato.tipo" placeholder="Tipo" class="form-control" required="">-->
                                                             <select name="tipo" id="tipo" class="form-control" v-model="dato.tipo">
                                                                 <option value="NUEVOS">NUEVOS</option>
-                                                                <option value="ANTIGUO">ANTIGUO</option>
-                                                                <option value="REPOSTULANTE">REPOSTULANTE</option>
+                                                                <option value="ANTIGUOS">ANTIGUOS</option>
+                                                                <option value="REPOSTULANTES">REPOSTULANTES</option>
                                                             </select>
                                                         </div>
                                                         <div class="form-group">
@@ -84,8 +84,8 @@
 <!--                                                                <input id="tipo2" type="text" name="txt" v-model="dato.tipo" placeholder="Tipo" class="form-control" required="">-->
                                                                 <select name="tipo" id="tipo2" class="form-control" v-model="dato.tipo">
                                                                     <option value="NUEVOS">NUEVOS</option>
-                                                                    <option value="ANTIGUO">ANTIGUO</option>
-                                                                    <option value="REPOSTULANTE">REPOSTULANTE</option>
+                                                                    <option value="ANTIGUOS">ANTIGUOS</option>
+                                                                    <option value="REPOSTULANTES">REPOSTULANTES</option>
                                                                 </select>
                                                             </div>
                                                             <div class="form-group">
@@ -129,9 +129,9 @@
                                     <tbody>
                                     <tr v-for="(i,index) in datos" :key="index">
                                         <td class="text-center">{{index+1}}</td>
-                                        <td >{{i.nombre}}</td>
+                                        <td>  {{i.nombre}}</td>
 <!--                                        <td :class="i.estado=='VISIBLE'?'text-success':'text-danger'">{{i.estado}}</td>-->
-                                        <td>{{i.tipo}}</td>
+                                        <td> <small class="badge" :class="i.tipo=='NUEVOS'?'badge-success':i.tipo=='ANTIGUOS'?'badge-warning':i.tipo=='REPOSTULANTES'?'badge-info':''">{{i.tipo}}</small></td>
                                         <td>{{i.inicio}}</td>
                                         <td>{{i.fin}}</td>
 <!--                                        <td class=""><span class="badge":class="i.color=='note-personal'?'badge-success':i.color=='note-work'?'badge-warning':i.color=='note-social'?'badge-secondary':i.color=='note-important'?'badge-danger':'badge-dark'">color</span></td>-->

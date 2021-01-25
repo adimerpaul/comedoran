@@ -47,6 +47,8 @@ class FichaController extends Controller
 //        exit;
         $familiar='';
         if ($request->hasFile('valor'))$valor = $request->file('valor')->store('files'); else $valor="";
+//        echo $valor;
+//        exit;
         if ($request->hasFile('matricula'))$matricula = $request->file('matricula')->store('files'); else $matricula="";
         if ($request->hasFile('vivienda'))$vivienda = $request->file('vivienda')->store('files'); else $vivienda="";
         if ($request->hasFile('ci'))$ci = $request->file('ci')->store('files'); else $ci="";
@@ -54,15 +56,12 @@ class FichaController extends Controller
         if ($request->hasFile('pago'))$pago = $request->file('pago')->store('files'); else $pago="";
         if ($request->hasFile('actividad'))$actividad = $request->file('actividad')->store('files'); else $actividad="";
         if ($request->hasFile('ciapoderados'))$ciapoderados = $request->file('ciapoderados')->store('files'); else $ciapoderados="";
-        if ($request->hasFile('familiar'))$familiar = $request->file('familiar')->store('files'); else $valor="";
+        if ($request->hasFile('familiar'))$familiar = $request->file('familiar')->store('files'); else $familiar="";
         if ($request->hasFile('defuncion'))$defuncion = $request->file('defuncion')->store('files'); else $defuncion="";
         if ($request->hasFile('divocio'))$divocio = $request->file('divocio')->store('files'); else $divocio="";
         if ($request->hasFile('denuncia'))$denuncia = $request->file('denuncia')->store('files'); else $denuncia="";
         if ($request->hasFile('viviendafamiliar'))$viviendafamiliar = $request->file('viviendafamiliar')->store('files'); else $viviendafamiliar="";
-
         $d=new Nuevo();
-
-
         $d->valor=$valor;
         $d->matricula=$matricula;
         $d->vivienda=$vivienda;
@@ -83,7 +82,7 @@ class FichaController extends Controller
 
         $d->save();
 
-//        return $d;
+//        return $valor;
 //        exit;
          $f=new Ficha();
         $f->nombres=$request->nombres;

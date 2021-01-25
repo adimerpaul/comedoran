@@ -2017,7 +2017,7 @@ __webpack_require__.r(__webpack_exports__);
     console.log('Component mounted.');
     axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/gestion').then(function (res) {
       // this.gestions=res.data;
-      // console.log(res.data);
+      console.log(res.data);
       res.data.forEach(function (r) {
         if (moment__WEBPACK_IMPORTED_MODULE_1___default()().isBetween(r.inicio, r.fin) && r.tipo == 'ANTIGUOS') {
           _this.gestions.push(r);
@@ -3776,7 +3776,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     getImage: function getImage(event) {
-      this.valor = event.target.files[0]; // this.valor2 = event.target.files[0];
+      this.valor = event.target.files[0];
+      console.log(this.valor); // this.valor2 = event.target.files[0];
       // this.valor3 = event.target.files[0];
       // this.valor4 = event.target.files[0];
       // this.valor5 = event.target.files[0];
@@ -3792,6 +3793,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     getImage2: function getImage2(event) {
       this.valor2 = event.target.files[0];
+      console.log(this.valor2);
     },
     getImage3: function getImage3(event) {
       this.valor3 = event.target.files[0];
@@ -3863,8 +3865,8 @@ __webpack_require__.r(__webpack_exports__);
       data.append('economicas', this.economicas); // return false;
 
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/ficha', data).then(function (res) {
-        // console.log(res.data);
-        // return false;
+        console.log(res.data); // return false;
+
         _this2.dato.ficha_id = res.data.id;
         axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/guardar', {
           hermanos: _this2.hermanos,
@@ -4159,6 +4161,24 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -4169,7 +4189,8 @@ __webpack_require__.r(__webpack_exports__);
       dato: {
         color: 'note-personal'
       },
-      datos: [] // content: ''
+      datos: [],
+      gestion_id: {} // content: ''
 
     };
   },
@@ -4177,22 +4198,21 @@ __webpack_require__.r(__webpack_exports__);
     var _this = this;
 
     axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('/gestion').then(function (res) {
-      // this.gestions=res.data;
-      // console.log(res.data);
-      res.data.forEach(function (r) {
-        // if( moment().isBetween(r.inicio, r.fin) && r.tipo=='NUEVOS'){
-        //     this.gestions.push(r);
-        // }
-        _this.gestions = res.data;
-      });
+      _this.gestions = res.data; // console.log(res.data);
+      // res.data.forEach(r=>{
+      //     // if( moment().isBetween(r.inicio, r.fin) && r.tipo=='NUEVOS'){
+      //     //     this.gestions.push(r);
+      //     // }
+      //     this.gestions=res.data;
+      // });
     }); // this.misdatos();
     // console.log('Component mounted.')
   },
   methods: {
-    misdatos: function misdatos() {
+    buscar: function buscar() {
       var _this2 = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('/gestion').then(function (res) {
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('/nuevo/' + this.gestion_id).then(function (res) {
         // console.log(res.data);
         _this2.datos = res.data; // res.data.forEach(r=>{
         //     console.log(r);
@@ -4200,37 +4220,48 @@ __webpack_require__.r(__webpack_exports__);
         // })
       });
     },
-    store: function store() {
+    misdatos: function misdatos() {
       var _this3 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('/gestion').then(function (res) {
+        // console.log(res.data);
+        _this3.datos = res.data; // res.data.forEach(r=>{
+        //     console.log(r);
+        //     this.datos.push(r);
+        // })
+      });
+    },
+    store: function store() {
+      var _this4 = this;
 
       axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('/gestion', this.dato).then(function (res) {
         // this.datos=res.data;
-        _this3.misdatos();
+        _this4.misdatos();
 
-        _this3.$toast.open({
+        _this4.$toast.open({
           message: "Dato creado",
           type: "success",
           duration: 3000,
           dismissible: true
         });
 
-        _this3.dato = {
+        _this4.dato = {
           tipo: ''
         };
-        _this3.dato = {
+        _this4.dato = {
           color: 'note-personal'
         };
         $('#exampleModal').modal('hide');
       });
     },
     mostrar: function mostrar(i) {
-      var _this4 = this;
+      var _this5 = this;
 
       // console.log(i);
       axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('/gestion/' + i.id).then(function (res) {
-        _this4.misdatos();
+        _this5.misdatos();
 
-        _this4.$toast.open({
+        _this5.$toast.open({
           message: "Datos Actualizados",
           type: "success",
           duration: 3000,
@@ -4243,28 +4274,28 @@ __webpack_require__.r(__webpack_exports__);
       this.dato = i;
     },
     update: function update() {
-      var _this5 = this;
+      var _this6 = this;
 
       axios__WEBPACK_IMPORTED_MODULE_1___default.a.put('/gestion/' + this.dato.id, this.dato).then(function (res) {
         // this.datos=res.data;
-        _this5.misdatos();
+        _this6.misdatos();
 
         $('#modificar').modal('hide');
 
-        _this5.$toast.open({
+        _this6.$toast.open({
           message: "Dato modificado",
           type: "warning",
           duration: 3000,
           dismissible: true
         });
 
-        _this5.dato = {
+        _this6.dato = {
           color: 'note-personal'
         };
       });
     },
     eliminar: function eliminar(i) {
-      var _this6 = this;
+      var _this7 = this;
 
       this.$fire({
         title: 'Seguro de eliminar??',
@@ -4277,17 +4308,17 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (r) {
         if (r.value) {
           axios__WEBPACK_IMPORTED_MODULE_1___default.a["delete"]('/gestion/' + i.id).then(function (res) {
-            _this6.misdatos(); // $('#modal-default').modal('hide');
+            _this7.misdatos(); // $('#modal-default').modal('hide');
 
 
-            _this6.$toast.open({
+            _this7.$toast.open({
               message: "Dato Eliminado",
               type: "error",
               duration: 3000,
               dismissible: true
             });
 
-            _this6.dato = {
+            _this7.dato = {
               color: 'note-personal'
             };
           });
@@ -4427,7 +4458,7 @@ __webpack_require__.r(__webpack_exports__);
       // this.gestions=res.data;
       // console.log(res.data);
       res.data.forEach(function (r) {
-        if (moment__WEBPACK_IMPORTED_MODULE_1___default()().isBetween(r.inicio, r.fin) && r.tipo == 'REPOSTULANTE') {
+        if (moment__WEBPACK_IMPORTED_MODULE_1___default()().isBetween(r.inicio, r.fin) && r.tipo == 'REPOSTULANTES') {
           _this.gestions.push(r);
         }
       });
@@ -85594,16 +85625,18 @@ var render = function() {
                                             _vm._v(" "),
                                             _c(
                                               "option",
-                                              { attrs: { value: "ANTIGUO" } },
-                                              [_vm._v("ANTIGUO")]
+                                              { attrs: { value: "ANTIGUOS" } },
+                                              [_vm._v("ANTIGUOS")]
                                             ),
                                             _vm._v(" "),
                                             _c(
                                               "option",
                                               {
-                                                attrs: { value: "REPOSTULANTE" }
+                                                attrs: {
+                                                  value: "REPOSTULANTES"
+                                                }
                                               },
-                                              [_vm._v("REPOSTULANTE")]
+                                              [_vm._v("REPOSTULANTES")]
                                             )
                                           ]
                                         )
@@ -85844,19 +85877,19 @@ var render = function() {
                                                 _c(
                                                   "option",
                                                   {
-                                                    attrs: { value: "ANTIGUO" }
+                                                    attrs: { value: "ANTIGUOS" }
                                                   },
-                                                  [_vm._v("ANTIGUO")]
+                                                  [_vm._v("ANTIGUOS")]
                                                 ),
                                                 _vm._v(" "),
                                                 _c(
                                                   "option",
                                                   {
                                                     attrs: {
-                                                      value: "REPOSTULANTE"
+                                                      value: "REPOSTULANTES"
                                                     }
                                                   },
-                                                  [_vm._v("REPOSTULANTE")]
+                                                  [_vm._v("REPOSTULANTES")]
                                                 )
                                               ]
                                             )
@@ -85981,9 +86014,25 @@ var render = function() {
                             _vm._v(_vm._s(index + 1))
                           ]),
                           _vm._v(" "),
-                          _c("td", [_vm._v(_vm._s(i.nombre))]),
+                          _c("td", [_vm._v("  " + _vm._s(i.nombre))]),
                           _vm._v(" "),
-                          _c("td", [_vm._v(_vm._s(i.tipo))]),
+                          _c("td", [
+                            _c(
+                              "small",
+                              {
+                                staticClass: "badge",
+                                class:
+                                  i.tipo == "NUEVOS"
+                                    ? "badge-success"
+                                    : i.tipo == "ANTIGUOS"
+                                    ? "badge-warning"
+                                    : i.tipo == "REPOSTULANTES"
+                                    ? "badge-info"
+                                    : ""
+                              },
+                              [_vm._v(_vm._s(i.tipo))]
+                            )
+                          ]),
                           _vm._v(" "),
                           _c("td", [_vm._v(_vm._s(i.inicio))]),
                           _vm._v(" "),
@@ -91701,23 +91750,73 @@ var render = function() {
                     "div",
                     { staticClass: "col-xl-12 col-md-12 col-sm-12 col-12" },
                     [
-                      _c("div", { staticClass: "row" }, [
-                        _vm._m(0),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "col-sm-2" }, [
-                          _c(
-                            "select",
-                            {
-                              staticClass: "form-control",
-                              attrs: { name: "", id: "" }
-                            },
-                            [_c("option", { attrs: { value: "" } })],
-                            2
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _vm._m(1)
-                      ]),
+                      _c(
+                        "form",
+                        {
+                          attrs: { action: "" },
+                          on: {
+                            submit: function($event) {
+                              $event.preventDefault()
+                              return _vm.buscar($event)
+                            }
+                          }
+                        },
+                        [
+                          _c("div", { staticClass: "row" }, [
+                            _vm._m(0),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "col-sm-2" }, [
+                              _c(
+                                "select",
+                                {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.gestion_id,
+                                      expression: "gestion_id"
+                                    }
+                                  ],
+                                  staticClass: "form-control",
+                                  attrs: { name: "", id: "", required: "" },
+                                  on: {
+                                    change: function($event) {
+                                      var $$selectedVal = Array.prototype.filter
+                                        .call($event.target.options, function(
+                                          o
+                                        ) {
+                                          return o.selected
+                                        })
+                                        .map(function(o) {
+                                          var val =
+                                            "_value" in o ? o._value : o.value
+                                          return val
+                                        })
+                                      _vm.gestion_id = $event.target.multiple
+                                        ? $$selectedVal
+                                        : $$selectedVal[0]
+                                    }
+                                  }
+                                },
+                                _vm._l(_vm.gestions, function(i) {
+                                  return _c(
+                                    "option",
+                                    { domProps: { value: i.id } },
+                                    [
+                                      _vm._v(
+                                        _vm._s(i.nombre) + " " + _vm._s(i.tipo)
+                                      )
+                                    ]
+                                  )
+                                }),
+                                0
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _vm._m(1)
+                          ])
+                        ]
+                      ),
                       _vm._v(" "),
                       _c(
                         "div",
@@ -91750,17 +91849,133 @@ var render = function() {
                                       on: {
                                         submit: function($event) {
                                           $event.preventDefault()
-                                          return _vm.store($event)
+                                          return _vm.update($event)
                                         }
                                       }
                                     },
                                     [
+                                      _c("h5", [
+                                        _vm._v(
+                                          "1)ASPECTOS ACADEMICOS (max 50 Puntos)"
+                                        )
+                                      ]),
+                                      _vm._v(" "),
                                       _c("div", { staticClass: "form-group" }, [
                                         _c(
-                                          "label",
-                                          { attrs: { for: "t-text" } },
-                                          [_vm._v("Gestion")]
-                                        ),
+                                          "div",
+                                          { staticClass: "form-group" },
+                                          [
+                                            _c(
+                                              "label",
+                                              { attrs: { for: "aa" } },
+                                              [
+                                                _vm._v(
+                                                  "a) Calificacion gestion anterior (max 50 Puntos)"
+                                                )
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            _c("input", {
+                                              directives: [
+                                                {
+                                                  name: "model",
+                                                  rawName: "v-model",
+                                                  value: _vm.dato.nombre,
+                                                  expression: "dato.nombre"
+                                                }
+                                              ],
+                                              staticClass: "form-control",
+                                              attrs: {
+                                                id: "aa",
+                                                type: "text",
+                                                name: "txt",
+                                                placeholder: "0",
+                                                required: ""
+                                              },
+                                              domProps: {
+                                                value: _vm.dato.nombre
+                                              },
+                                              on: {
+                                                input: function($event) {
+                                                  if ($event.target.composing) {
+                                                    return
+                                                  }
+                                                  _vm.$set(
+                                                    _vm.dato,
+                                                    "nombre",
+                                                    $event.target.value
+                                                  )
+                                                }
+                                              }
+                                            })
+                                          ]
+                                        )
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("h5", [
+                                        _vm._v(
+                                          "1)ASPECTOS SOCIOECONOMICOS (max 50 Puntos)"
+                                        )
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("div", { staticClass: "form-group" }, [
+                                        _c(
+                                          "div",
+                                          { staticClass: "form-group" },
+                                          [
+                                            _c(
+                                              "label",
+                                              { attrs: { for: "ba" } },
+                                              [
+                                                _vm._v(
+                                                  "a) Ingreso grupo familiar (max 20 Puntos)"
+                                                )
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            _c("input", {
+                                              directives: [
+                                                {
+                                                  name: "model",
+                                                  rawName: "v-model",
+                                                  value: _vm.dato.nombre,
+                                                  expression: "dato.nombre"
+                                                }
+                                              ],
+                                              staticClass: "form-control",
+                                              attrs: {
+                                                id: "ba",
+                                                type: "text",
+                                                name: "txt",
+                                                placeholder: "0",
+                                                required: ""
+                                              },
+                                              domProps: {
+                                                value: _vm.dato.nombre
+                                              },
+                                              on: {
+                                                input: function($event) {
+                                                  if ($event.target.composing) {
+                                                    return
+                                                  }
+                                                  _vm.$set(
+                                                    _vm.dato,
+                                                    "nombre",
+                                                    $event.target.value
+                                                  )
+                                                }
+                                              }
+                                            })
+                                          ]
+                                        )
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("div", { staticClass: "form-group" }, [
+                                        _c("label", { attrs: { for: "bb" } }, [
+                                          _vm._v(
+                                            "b) Estado actual de los padres y condiciones del hijo (max 5 Puntos)"
+                                          )
+                                        ]),
                                         _vm._v(" "),
                                         _c("input", {
                                           directives: [
@@ -91773,10 +91988,10 @@ var render = function() {
                                           ],
                                           staticClass: "form-control",
                                           attrs: {
-                                            id: "t-text",
+                                            id: "bb",
                                             type: "text",
                                             name: "txt",
-                                            placeholder: "Gestion",
+                                            placeholder: "0",
                                             required: ""
                                           },
                                           domProps: { value: _vm.dato.nombre },
@@ -91796,100 +92011,30 @@ var render = function() {
                                       ]),
                                       _vm._v(" "),
                                       _c("div", { staticClass: "form-group" }, [
-                                        _c(
-                                          "label",
-                                          { attrs: { for: "tipo" } },
-                                          [_vm._v("Tipo")]
-                                        ),
-                                        _vm._v(" "),
-                                        _c(
-                                          "select",
-                                          {
-                                            directives: [
-                                              {
-                                                name: "model",
-                                                rawName: "v-model",
-                                                value: _vm.dato.tipo,
-                                                expression: "dato.tipo"
-                                              }
-                                            ],
-                                            staticClass: "form-control",
-                                            attrs: { name: "tipo", id: "tipo" },
-                                            on: {
-                                              change: function($event) {
-                                                var $$selectedVal = Array.prototype.filter
-                                                  .call(
-                                                    $event.target.options,
-                                                    function(o) {
-                                                      return o.selected
-                                                    }
-                                                  )
-                                                  .map(function(o) {
-                                                    var val =
-                                                      "_value" in o
-                                                        ? o._value
-                                                        : o.value
-                                                    return val
-                                                  })
-                                                _vm.$set(
-                                                  _vm.dato,
-                                                  "tipo",
-                                                  $event.target.multiple
-                                                    ? $$selectedVal
-                                                    : $$selectedVal[0]
-                                                )
-                                              }
-                                            }
-                                          },
-                                          [
-                                            _c(
-                                              "option",
-                                              { attrs: { value: "NUEVO" } },
-                                              [_vm._v("NUEVO")]
-                                            ),
-                                            _vm._v(" "),
-                                            _c(
-                                              "option",
-                                              { attrs: { value: "ANTIGUO" } },
-                                              [_vm._v("ANTIGUO")]
-                                            ),
-                                            _vm._v(" "),
-                                            _c(
-                                              "option",
-                                              {
-                                                attrs: { value: "REPOSTULANTE" }
-                                              },
-                                              [_vm._v("REPOSTULANTE")]
-                                            )
-                                          ]
-                                        )
-                                      ]),
-                                      _vm._v(" "),
-                                      _c("div", { staticClass: "form-group" }, [
-                                        _c(
-                                          "label",
-                                          { attrs: { for: "inicio" } },
-                                          [_vm._v("Inicio")]
-                                        ),
+                                        _c("label", { attrs: { for: "bc" } }, [
+                                          _vm._v(
+                                            "c) Grado de instruccion de quien depende el estudiante (max 5 Puntos)"
+                                          )
+                                        ]),
                                         _vm._v(" "),
                                         _c("input", {
                                           directives: [
                                             {
                                               name: "model",
                                               rawName: "v-model",
-                                              value: _vm.dato.inicio,
-                                              expression: "dato.inicio"
+                                              value: _vm.dato.nombre,
+                                              expression: "dato.nombre"
                                             }
                                           ],
                                           staticClass: "form-control",
                                           attrs: {
-                                            id: "inicio",
-                                            type: "date",
+                                            id: "bc",
+                                            type: "text",
                                             name: "txt",
-                                            placeholder: "Inicio",
+                                            placeholder: "0",
                                             required: ""
                                           },
-                                          domProps: { value: _vm.dato.inicio },
+                                          domProps: { value: _vm.dato.nombre },
                                           on: {
                                             input: function($event) {
                                               if ($event.target.composing) {
@@ -91897,7 +92042,7 @@ var render = function() {
                                               }
                                               _vm.$set(
                                                 _vm.dato,
-                                                "inicio",
+                                                "nombre",
                                                 $event.target.value
                                               )
                                             }
@@ -91906,8 +92051,10 @@ var render = function() {
                                       ]),
                                       _vm._v(" "),
                                       _c("div", { staticClass: "form-group" }, [
-                                        _c("label", { attrs: { for: "fin" } }, [
-                                          _vm._v("Fin")
+                                        _c("label", { attrs: { for: "bd" } }, [
+                                          _vm._v(
+                                            "d) Tendencia de la vivienda (max 10 Puntos)"
+                                          )
                                         ]),
                                         _vm._v(" "),
                                         _c("input", {
@@ -91915,19 +92062,19 @@ var render = function() {
                                             {
                                               name: "model",
                                               rawName: "v-model",
-                                              value: _vm.dato.fin,
-                                              expression: "dato.fin"
+                                              value: _vm.dato.nombre,
+                                              expression: "dato.nombre"
                                             }
                                           ],
                                           staticClass: "form-control",
                                           attrs: {
-                                            id: "fin",
-                                            type: "date",
+                                            id: "bd",
+                                            type: "text",
                                             name: "txt",
-                                            placeholder: "Fin",
+                                            placeholder: "0",
                                             required: ""
                                           },
-                                          domProps: { value: _vm.dato.fin },
+                                          domProps: { value: _vm.dato.nombre },
                                           on: {
                                             input: function($event) {
                                               if ($event.target.composing) {
@@ -91935,7 +92082,87 @@ var render = function() {
                                               }
                                               _vm.$set(
                                                 _vm.dato,
-                                                "fin",
+                                                "nombre",
+                                                $event.target.value
+                                              )
+                                            }
+                                          }
+                                        })
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("div", { staticClass: "form-group" }, [
+                                        _c("label", { attrs: { for: "be" } }, [
+                                          _vm._v(
+                                            "e) Ubicacion de la vivienda (max 5 Puntos)"
+                                          )
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("input", {
+                                          directives: [
+                                            {
+                                              name: "model",
+                                              rawName: "v-model",
+                                              value: _vm.dato.nombre,
+                                              expression: "dato.nombre"
+                                            }
+                                          ],
+                                          staticClass: "form-control",
+                                          attrs: {
+                                            id: "be",
+                                            type: "text",
+                                            name: "txt",
+                                            placeholder: "0",
+                                            required: ""
+                                          },
+                                          domProps: { value: _vm.dato.nombre },
+                                          on: {
+                                            input: function($event) {
+                                              if ($event.target.composing) {
+                                                return
+                                              }
+                                              _vm.$set(
+                                                _vm.dato,
+                                                "nombre",
+                                                $event.target.value
+                                              )
+                                            }
+                                          }
+                                        })
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("div", { staticClass: "form-group" }, [
+                                        _c("label", { attrs: { for: "bf" } }, [
+                                          _vm._v(
+                                            "f) Procedecia de la vivienda (max 5 Puntos)"
+                                          )
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("input", {
+                                          directives: [
+                                            {
+                                              name: "model",
+                                              rawName: "v-model",
+                                              value: _vm.dato.nombre,
+                                              expression: "dato.nombre"
+                                            }
+                                          ],
+                                          staticClass: "form-control",
+                                          attrs: {
+                                            id: "bf",
+                                            type: "text",
+                                            name: "txt",
+                                            placeholder: "0",
+                                            required: ""
+                                          },
+                                          domProps: { value: _vm.dato.nombre },
+                                          on: {
+                                            input: function($event) {
+                                              if ($event.target.composing) {
+                                                return
+                                              }
+                                              _vm.$set(
+                                                _vm.dato,
+                                                "nombre",
                                                 $event.target.value
                                               )
                                             }
@@ -91990,6 +92217,12 @@ var render = function() {
                                     },
                                     [
                                       _c("div", { staticClass: "form-group" }, [
+                                        _c("h3", [
+                                          _vm._v(
+                                            "1)ASPECTOS ACADEMICOS (max 50 Puntos)"
+                                          )
+                                        ]),
+                                        _vm._v(" "),
                                         _c(
                                           "div",
                                           { staticClass: "form-group" },
@@ -91997,7 +92230,11 @@ var render = function() {
                                             _c(
                                               "label",
                                               { attrs: { for: "t-text2" } },
-                                              [_vm._v("Gestion")]
+                                              [
+                                                _vm._v(
+                                                  "a) Calificacion gestion anterior (max 50 Puntos)"
+                                                )
+                                              ]
                                             ),
                                             _vm._v(" "),
                                             _c("input", {
@@ -92235,122 +92472,21 @@ var render = function() {
                             _vm._v(_vm._s(index + 1))
                           ]),
                           _vm._v(" "),
-                          _c("td", [_vm._v(_vm._s(i.nombre))]),
-                          _vm._v(" "),
-                          _c("td", [_vm._v(_vm._s(i.tipo))]),
-                          _vm._v(" "),
-                          _c("td", [_vm._v(_vm._s(i.inicio))]),
-                          _vm._v(" "),
-                          _c("td", [_vm._v(_vm._s(i.fin))]),
-                          _vm._v(" "),
                           _c("td", [
-                            _c(
-                              "a",
-                              {
-                                attrs: {
-                                  "data-toggle": "tooltip",
-                                  "data-placement": "top",
-                                  title: "",
-                                  "data-original-title": "Edit"
-                                },
-                                on: {
-                                  click: function($event) {
-                                    return _vm.modificar(i)
-                                  }
-                                }
-                              },
-                              [
-                                _c(
-                                  "svg",
-                                  {
-                                    staticClass: "feather feather-edit-2",
-                                    attrs: {
-                                      xmlns: "http://www.w3.org/2000/svg",
-                                      width: "24",
-                                      height: "24",
-                                      viewBox: "0 0 24 24",
-                                      fill: "none",
-                                      stroke: "currentColor",
-                                      "stroke-width": "2",
-                                      "stroke-linecap": "round",
-                                      "stroke-linejoin": "round"
-                                    }
-                                  },
-                                  [
-                                    _c("path", {
-                                      attrs: {
-                                        d:
-                                          "M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"
-                                      }
-                                    })
-                                  ]
-                                )
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "a",
-                              {
-                                attrs: {
-                                  "data-toggle": "tooltip",
-                                  "data-placement": "top",
-                                  title: "",
-                                  "data-original-title": "Delete"
-                                },
-                                on: {
-                                  click: function($event) {
-                                    return _vm.eliminar(i)
-                                  }
-                                }
-                              },
-                              [
-                                _c(
-                                  "svg",
-                                  {
-                                    staticClass: "feather feather-trash-2",
-                                    attrs: {
-                                      xmlns: "http://www.w3.org/2000/svg",
-                                      width: "24",
-                                      height: "24",
-                                      viewBox: "0 0 24 24",
-                                      fill: "none",
-                                      stroke: "currentColor",
-                                      "stroke-width": "2",
-                                      "stroke-linecap": "round",
-                                      "stroke-linejoin": "round"
-                                    }
-                                  },
-                                  [
-                                    _c("polyline", {
-                                      attrs: { points: "3 6 5 6 21 6" }
-                                    }),
-                                    _c("path", {
-                                      attrs: {
-                                        d:
-                                          "M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"
-                                      }
-                                    }),
-                                    _c("line", {
-                                      attrs: {
-                                        x1: "10",
-                                        y1: "11",
-                                        x2: "10",
-                                        y2: "17"
-                                      }
-                                    }),
-                                    _c("line", {
-                                      attrs: {
-                                        x1: "14",
-                                        y1: "11",
-                                        x2: "14",
-                                        y2: "17"
-                                      }
-                                    })
-                                  ]
-                                )
-                              ]
+                            _vm._v(
+                              _vm._s(i.user.ficha[0].paterno) +
+                                " " +
+                                _vm._s(i.user.ficha[0].materno) +
+                                " " +
+                                _vm._s(i.user.ficha[0].nombre)
                             )
-                          ])
+                          ]),
+                          _vm._v(" "),
+                          _c("td", [_vm._v(_vm._s(i.user.ficha[0].facultad))]),
+                          _vm._v(" "),
+                          _c("td", [_vm._v(_vm._s(i.user.ficha[0].carrera))]),
+                          _vm._v(" "),
+                          _vm._m(7, true)
                         ])
                       }),
                       0
@@ -92381,16 +92517,11 @@ var staticRenderFns = [
     return _c("div", { staticClass: "col-sm-2" }, [
       _c(
         "button",
-        {
-          staticClass: "btn btn-success mb-2 mr-2",
-          staticStyle: { "margin-top": "1em", "margin-left": "1em" },
-          attrs: {
-            type: "button",
-            "data-toggle": "modal",
-            "data-target": "#exampleModal"
-          }
-        },
-        [_c("i", { staticClass: "fa fa-cog" })]
+        { staticClass: "btn btn-success", attrs: { type: "submit" } },
+        [
+          _c("i", { staticClass: "fa fa-cog" }),
+          _vm._v(" Buscar\n                                            ")
+        ]
       )
     ])
   },
@@ -92486,16 +92617,29 @@ var staticRenderFns = [
       _c("tr", [
         _c("th", { staticClass: "text-center" }, [_vm._v("#")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Gestion")]),
+        _c("th", [_vm._v("Nombre")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Tipo")]),
+        _c("th", [_vm._v("Facultad")]),
         _vm._v(" "),
-        _c("th", {}, [_vm._v("Inicio")]),
-        _vm._v(" "),
-        _c("th", {}, [_vm._v("Fin")]),
+        _c("th", {}, [_vm._v("Carrera")]),
         _vm._v(" "),
         _c("th", [_vm._v("Opciones")])
       ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("td", [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-success",
+          attrs: { "data-toggle": "modal", "data-target": "#exampleModal" }
+        },
+        [_c("i", { staticClass: "fa fa-book" }), _vm._v(" Nota")]
+      )
     ])
   }
 ]
@@ -114025,16 +114169,16 @@ var routes = [{
   path: '/gestiones',
   component: _components_gestiones__WEBPACK_IMPORTED_MODULE_15__["default"]
 }, {
-  path: '/repostulantes',
+  path: '/vrepostulante',
   component: _components_repostulante__WEBPACK_IMPORTED_MODULE_11__["default"]
 }, {
   path: '/comunicados',
   component: _components_comunicados__WEBPACK_IMPORTED_MODULE_13__["default"]
 }, {
-  path: '/antiguo',
+  path: '/vantiguo',
   component: _components_antiguo__WEBPACK_IMPORTED_MODULE_12__["default"]
 }, {
-  path: '/nuevo',
+  path: '/vnuevo',
   component: _components_nuevo__WEBPACK_IMPORTED_MODULE_14__["default"]
 }, {
   path: '/registros',

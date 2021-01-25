@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Nuevo;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class NuevoController extends Controller
@@ -44,9 +45,10 @@ class NuevoController extends Controller
      * @param  \App\Models\Nuevo  $nuevo
      * @return \Illuminate\Http\Response
      */
-    public function show(Nuevo $nuevo)
+    public function show($gestion_id)
     {
-        //
+        return Nuevo::with('user')->where('gestion_id',$gestion_id)->get();
+//        return User::with('ficha')->get();
     }
 
     /**

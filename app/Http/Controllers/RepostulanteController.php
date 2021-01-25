@@ -63,9 +63,9 @@ class RepostulanteController extends Controller
      * @param  \App\Models\Repostulante  $repostulante
      * @return \Illuminate\Http\Response
      */
-    public function show(Repostulante $repostulante)
+    public function show($gestion_id)
     {
-        //
+        return Repostulante::where('gestion_id',$gestion_id)->get();
     }
 
     /**

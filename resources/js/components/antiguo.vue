@@ -102,7 +102,7 @@ export default {
         console.log('Component mounted.')
         axios.get('/gestion').then(res=>{
             // this.gestions=res.data;
-            // console.log(res.data);
+            console.log(res.data);
             res.data.forEach(r=>{
                 if( moment().isBetween(r.inicio, r.fin) && r.tipo=='ANTIGUOS'){
                     this.gestions.push(r);

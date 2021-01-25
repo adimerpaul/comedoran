@@ -35,10 +35,10 @@ import registros from './components/registros';
 const routes = [
     { path: '/home', component: home },
     { path: '/gestiones', component: gestiones },
-    { path: '/repostulantes', component: repostulantes },
+    { path: '/vrepostulante', component: repostulantes },
     { path: '/comunicados', component: comunicados },
-    { path: '/antiguo', component: antiguo },
-    { path: '/nuevo', component: nuevo },
+    { path: '/vantiguo', component: antiguo },
+    { path: '/vnuevo', component: nuevo },
     { path: '/registros', component: registros },
 ]
 

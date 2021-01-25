@@ -712,7 +712,9 @@
         },
         methods: {
             getImage(event){
+
                 this.valor = event.target.files[0];
+                console.log(this.valor);
                 // this.valor2 = event.target.files[0];
                 // this.valor3 = event.target.files[0];
                 // this.valor4 = event.target.files[0];
@@ -732,6 +734,7 @@
             },
             getImage2(event){
                 this.valor2 = event.target.files[0];
+                console.log(this.valor2);
             },
             getImage3(event){
                 this.valor3 = event.target.files[0];
@@ -804,7 +807,7 @@
                 // return false;
 
                 axios.post('/ficha',data).then(res => {
-                    // console.log(res.data);
+                    console.log(res.data);
                     // return false;
                     this.dato.ficha_id=res.data.id;
                     axios.post('/guardar', {

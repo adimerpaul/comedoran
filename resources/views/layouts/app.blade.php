@@ -56,7 +56,7 @@
                             </router-link>
                         @else
                             <router-link
-                                to="/antiguo"
+                                to="/vantiguo"
                                 v-slot="{ href, route, navigate, isActive }"
                             >
                                 <li class="nav-item " v-bind:data-active="isActive">
@@ -64,7 +64,7 @@
                                 </li>
                             </router-link>
                             <router-link
-                                to="/nuevo"
+                                to="/vnuevo"
                                 v-slot="{ href, route, navigate, isActive }"
                             >
                                 <li class="nav-item " v-bind:data-active="isActive">
@@ -72,7 +72,7 @@
                                 </li>
                             </router-link>
                             <router-link
-                                to="/repostulantes"
+                                to="/vrepostulante"
                                 v-slot="{ href, route, navigate, isActive }"
                             >
                                 <li class="nav-item " v-bind:data-active="isActive">

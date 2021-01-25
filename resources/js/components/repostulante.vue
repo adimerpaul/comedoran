@@ -109,7 +109,7 @@ export default {
             // this.gestions=res.data;
             // console.log(res.data);
             res.data.forEach(r=>{
-                if( moment().isBetween(r.inicio, r.fin) && r.tipo=='REPOSTULANTE'){
+                if( moment().isBetween(r.inicio, r.fin) && r.tipo=='REPOSTULANTES'){
                     this.gestions.push(r);
                 }
             });
