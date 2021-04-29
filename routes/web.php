@@ -43,6 +43,7 @@ Route::apiResource('/comunicado',\App\Http\Controllers\ComunicadoController::cla
 Route::apiResource('/repostulante',\App\Http\Controllers\RepostulanteController::class)->middleware('auth');
 Route::apiResource('/nuevo',\App\Http\Controllers\NuevoController::class)->middleware('auth');
 Route::apiResource('/antiguo',\App\Http\Controllers\AntiguoController::class)->middleware('auth');
+Route::get('/buscar/{id}',[\App\Http\Controllers\AntiguoController::class,'buscar'])->middleware('auth');
 
 Route::apiResource('/ficha',\App\Http\Controllers\FichaController::class)->middleware('auth');
 Route::apiResource('/gestion',\App\Http\Controllers\GestionController::class)->middleware('auth');

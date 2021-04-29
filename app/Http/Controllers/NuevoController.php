@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Nuevo;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class NuevoController extends Controller
 {
@@ -47,7 +48,7 @@ class NuevoController extends Controller
      */
     public function show($gestion_id)
     {
-        return Nuevo::with('user')->where('gestion_id',$gestion_id)->get();
+        return Nuevo::with('user')->where('gestion_id',$gestion_id)->where('user_id',Auth::user()->id)->get()->count();
 //        return User::with('ficha')->get();
     }
 

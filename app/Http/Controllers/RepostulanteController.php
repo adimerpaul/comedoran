@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Antiguo;
 use App\Models\Gestion;
+use App\Models\Nuevo;
 use App\Models\Repostulante;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -65,7 +66,9 @@ class RepostulanteController extends Controller
      */
     public function show($gestion_id)
     {
-        return Repostulante::where('gestion_id',$gestion_id)->get();
+        return Repostulante::where('gestion_id',$gestion_id)->where('user_id',Auth::user()->id)->get()->count();
+
+//        return Repostulante::where('gestion_id',$gestion_id)->get();
     }
 
     /**

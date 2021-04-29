@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Antiguo;
 use App\Models\Gestion;
 use App\Models\Nuevo;
+use App\Models\Repostulante;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -18,6 +19,25 @@ class AntiguoController extends Controller
     public function index()
     {
         //
+    }
+    public function buscar($id)
+    {
+        $antiguos=Antiguo::with('user')->where('gestion_id',$id)->get();
+        if ($antiguos->count()>0){
+            return $antiguos;
+        }else{
+            $nuevos=Nuevo::with('user')->where('gestion_id',$id)->get();
+            if ($nuevos->count()>0){
+                return $nuevos;
+            }else{
+                $repostulante=Repostulante::with('user')->where('gestion_id',$id)->get();
+                if ($repostulante->count()>0){
+                    return $repostulante;
+                }else{
+
+                }
+            }
+        }
     }
 
     /**
@@ -67,7 +87,9 @@ class AntiguoController extends Controller
      */
     public function show($gestion_id)
     {
-        return Antiguo::where('gestion_id',$gestion_id)->get();
+//        return Antiguo::where('gestion_id',$gestion_id)->get();
+        return Antiguo::where('gestion_id',$gestion_id)->where('user_id',Auth::user()->id)->get()->count();
+
     }
 
     /**
