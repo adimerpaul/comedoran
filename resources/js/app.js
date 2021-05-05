@@ -3,6 +3,7 @@ require('./bootstrap');
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 Vue.use(VueRouter)
+import 'leaflet/dist/leaflet.css';
 
 import vSelect from 'vue-select'
 import 'vue-select/dist/vue-select.css';

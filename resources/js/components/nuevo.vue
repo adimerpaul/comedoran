@@ -617,6 +617,22 @@
             </template>
 
         </div>
+        <div style="height: 500px; width: 100%">
+<!--            <div style="height: 200px; overflow: auto;">-->
+<!--                <p>First marker is placed at {{ withPopup.lat }}, {{ withPopup.lng }}</p>-->
+<!--                <p>Center is at {{ currentCenter }} and the zoom is: {{ currentZoom }}</p>-->
+<!--                <button @click="showLongText">-->
+<!--                    Toggle long popup-->
+<!--                </button>-->
+<!--                <button @click="showMap = !showMap">-->
+<!--                    Toggle map-->
+<!--                </button>-->
+<!--            </div>-->
+            <l-map :zoom="zoom" :center="center" @click="agregar">
+                <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
+                <l-marker v-for="(marker, index) in markers" :key="index" :lat-lng="marker" @click="removeMarker(index)"></l-marker>
+            </l-map>
+        </div>
     </div>
 
 
@@ -625,11 +641,21 @@
 
 <script>
     import  axios from "axios";
-    import moment from 'moment'
+    import moment from 'moment';
+
+    import { latLng } from "leaflet";
+    import { LMap, LTileLayer, LMarker, LPopup, LTooltip } from "vue2-leaflet";
 
     // import { latLng } from "leaflet";
     // import { LMap, LTileLayer, LMarker, LPopup, LTooltip } from "vue2-leaflet";
     export default {
+        components: {
+            LMap,
+            LTileLayer,
+            LMarker,
+            LPopup,
+            LTooltip
+        },
         mounted() {
             // console.log('Component mounted.')
             this.verificar();
@@ -643,6 +669,19 @@
     // },
         data() {
             return {
+                zoom: 14,
+                center: L.latLng(47.413220, -1.219482),
+                url: 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
+                attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+                markers: [
+                    L.latLng(47.412, -1.218),
+                    L.latLng(47.413220, -1.219482),
+                    L.latLng(47.414, -1.22),
+                ],
+
+
+
+
                 registrado:false,
                 gestions:[],
                 msg: "Vue Image Upload and Resize Demo",
@@ -689,6 +728,24 @@
             };
         },
         methods: {
+            removeMarker(index) {
+                this.markers.splice(index, 1);
+            },
+            agregar(event) {
+                this.markers.push(event.latlng);
+            },
+            // zoomUpdate(zoom) {
+            //     this.currentZoom = zoom;
+            // },
+            // centerUpdate(center) {
+            //     this.currentCenter = center;
+            // },
+            // showLongText() {
+            //     this.showParagraph = !this.showParagraph;
+            // },
+            // innerClick() {
+            //     alert("Click!");
+            // },
             verificar(){
                 axios.get('/gestion').then(res=>{
                     res.data.forEach(r=>{
