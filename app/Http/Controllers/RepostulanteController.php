@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Antiguo;
+use App\Models\Ficha;
 use App\Models\Gestion;
 use App\Models\Nuevo;
 use App\Models\Repostulante;
@@ -45,15 +46,17 @@ class RepostulanteController extends Controller
         if ($request->hasFile('matricula'))$matricula = $request->file('matricula')->store('files'); else $matricula="";
         if ($request->hasFile('pago'))$pago = $request->file('pago')->store('files'); else $pago="";
         if ($request->hasFile('certificado'))$certificado = $request->file('certificado')->store('files'); else $certificado="";
-
+        $fi=Ficha::where('user_id',Auth::user()->id)->first();
+//        return $ficha->id;
         $d=new Repostulante();
         $d->valor=$valor;
-        $d->ficha=$ficha;
+        $d->aficha=$ficha;
         $d->matricula=$matricula;
         $d->pago=$pago;
         $d->certificado=$certificado;
         $d->user_id=Auth::user()->id;
         $d->gestion_id=$g->id;
+        $d->ficha_id=$fi->id;
         $d->save();
         return $d;
     }

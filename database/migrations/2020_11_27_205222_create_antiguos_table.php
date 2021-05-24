@@ -25,6 +25,8 @@ class CreateAntiguosTable extends Migration
             $table->foreign('user_id')->references('id')->on('users');
             $table->unsignedBigInteger('gestion_id');
             $table->foreign('gestion_id')->references('id')->on('gestions');
+            $table->unsignedBigInteger('ficha_id');
+            $table->foreign('ficha_id')->references('id')->on('fichas');
             $table->timestamps();
         });
     }

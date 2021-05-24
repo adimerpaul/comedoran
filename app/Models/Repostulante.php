@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Repostulante extends Model
 {
     use HasFactory;
+    public function user(){
+        return $this->belongsTo(User::class)->with('ficha');
+    }
+    public function ficha(){
+        return $this->belongsTo(Ficha::class);
+    }
 }

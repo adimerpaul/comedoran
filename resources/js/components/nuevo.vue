@@ -603,8 +603,12 @@
                                                 <!--                                                </l-map>-->
                                                 <!--                                            </div>-->
                                             </div>
-                                            <button class="btn btn-success btn-block submit-fn mt-2" type="submit">
-                                                <i class="fa fa-save"></i> ENVIAR INFORMACION
+                                            <button :disabled="enviar" class="btn btn-success btn-block submit-fn mt-2" type="submit">
+                                                <i v-if="!enviar" class="fa fa-save"></i>
+                                                <div v-else class="spinner-border text-primary" role="status">
+                                                    <span class="sr-only">Loading...</span>
+                                                </div>
+                                                ENVIAR INFORMACION
                                             </button>
                                         </div>
 
@@ -670,6 +674,7 @@
         data() {
             return {
                 zoom: 14,
+                enviar:false,
                 center: L.latLng(47.413220, -1.219482),
                 url: 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
                 attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
@@ -769,7 +774,7 @@
             getImage(event){
 
                 this.valor = event.target.files[0];
-                console.log(this.valor);
+                // console.log(this.valor);
                 // this.valor2 = event.target.files[0];
                 // this.valor3 = event.target.files[0];
                 // this.valor4 = event.target.files[0];
@@ -789,7 +794,7 @@
             },
             getImage2(event){
                 this.valor2 = event.target.files[0];
-                console.log(this.valor2);
+                // console.log(this.valor2);
             },
             getImage3(event){
                 this.valor3 = event.target.files[0];
@@ -860,21 +865,21 @@
                 data.append('familia', this.familias);
                 data.append('economicas', this.economicas);
                 // return false;
-
+                this.enviar=true;
                 axios.post('/ficha',data).then(res => {
-                    console.log(res.data);
+                    // console.log(res.data);
                     // return false;
                     this.dato.ficha_id=res.data.id;
                     axios.post('/guardar', {
                         hermanos:this.hermanos,
                         familias:this.familias,
                         economicas:this.economicas,
-                        ficha_id:res.data.id
+                        ficha_id:res.data.id,
+                        hermano:this.dato.hermanos,
                     }).then(r=>{
-                        console.log(r);
+                        console.log(r.data);
+                        this.enviar=false;
                         this.verificar();
-
-
                         this.$toast.open({
                             message: "Datos Enviados",
                             type: "success",

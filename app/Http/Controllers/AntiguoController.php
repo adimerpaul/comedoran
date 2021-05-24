@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Antiguo;
+use App\Models\Ficha;
 use App\Models\Gestion;
 use App\Models\Nuevo;
 use App\Models\Repostulante;
@@ -66,7 +67,7 @@ class AntiguoController extends Controller
         if ($request->hasFile('pago'))$pago = $request->file('pago')->store('files'); else $pago="";
         if ($request->hasFile('actualizacion'))$actualizacion = $request->file('actualizacion')->store('files'); else $actualizacion="";
         if ($request->hasFile('certificacion'))$certificacion = $request->file('certificacion')->store('files'); else $certificacion="";
-
+        $ficha=Ficha::where('user_id',Auth::user()->id)->first();
         $d=new Antiguo();
         $d->valor=$valor;
         $d->renovacion=$renovacion;
@@ -75,6 +76,7 @@ class AntiguoController extends Controller
         $d->certificacion=$certificacion;
         $d->user_id=Auth::user()->id;
         $d->gestion_id=$g->id;
+        $d->ficha_id=$ficha->id;
         $d->save();
         return $d;
     }

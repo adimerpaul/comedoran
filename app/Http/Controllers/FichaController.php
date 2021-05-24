@@ -8,6 +8,7 @@ use App\Models\Ficha;
 use App\Models\Gestion;
 use App\Models\Hermano;
 use App\Models\Nuevo;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -61,30 +62,8 @@ class FichaController extends Controller
         if ($request->hasFile('divocio'))$divocio = $request->file('divocio')->store('files'); else $divocio="";
         if ($request->hasFile('denuncia'))$denuncia = $request->file('denuncia')->store('files'); else $denuncia="";
         if ($request->hasFile('viviendafamiliar'))$viviendafamiliar = $request->file('viviendafamiliar')->store('files'); else $viviendafamiliar="";
-        $d=new Nuevo();
-        $d->valor=$valor;
-        $d->matricula=$matricula;
-        $d->vivienda=$vivienda;
-        $d->ci=$ci;
-        $d->libreta=$libreta;
-        $d->pago=$pago;
-        $d->actividad=$actividad;
-        $d->ciapoderados=$ciapoderados;
-        $d->familiar=$familiar;
-        $d->defuncion=$defuncion;
-        $d->divocio=$divocio;
-        $d->denuncia=$denuncia;
-        $d->gestion_id=$g->id;
 
-
-        $d->viviendafamiliar=$viviendafamiliar;
-        $d->user_id=Auth::user()->id;
-
-        $d->save();
-
-//        return $valor;
-//        exit;
-         $f=new Ficha();
+        $f=new Ficha();
         $f->nombres=$request->nombres;
         $f->paterno=$request->paterno;
         $f->materno=$request->materno;
@@ -100,6 +79,28 @@ class FichaController extends Controller
         $f->observacion=$request->observacion;
         $f->user_id=Auth::user()->id;
         $f->save();
+        $d=new Nuevo();
+        $d->valor=$valor;
+        $d->matricula=$matricula;
+        $d->vivienda=$vivienda;
+        $d->ci=$ci;
+        $d->libreta=$libreta;
+        $d->pago=$pago;
+        $d->actividad=$actividad;
+        $d->ciapoderados=$ciapoderados;
+        $d->familiar=$familiar;
+        $d->defuncion=$defuncion;
+        $d->divocio=$divocio;
+        $d->denuncia=$denuncia;
+        $d->gestion_id=$g->id;
+        $d->viviendafamiliar=$viviendafamiliar;
+        $d->user_id=Auth::user()->id;
+        $d->ficha_id=$f->id;
+        $d->save();
+
+//        return $valor;
+//        exit;
+
         return $f;
 //        echo $request->hermanos;
 
@@ -147,15 +148,19 @@ class FichaController extends Controller
 //    exit;
 //        return $request->hermanos;
 //        exit;
-        foreach ($request->hermanos as $row){
-            $h=new Hermano();
-            $h->nombre=$row['nombre'];
-            $h->becario=$row['becario'];
-            $h->postulante=$row['postulante'];
-            $h->facultad=$row['facultad'];
-            $h->carrera=$row['carrera'];
-            $h->ficha_id=$request->ficha_id;
-            $h->save();
+//        return $request->hermanos;
+//        return $request->hermano;
+        if ($request->hermano=='SI'){
+            foreach ($request->hermanos as $row){
+                $h=new Hermano();
+                $h->nombre=$row['nombre'];
+                $h->becario=$row['becario'];
+                $h->postulante=$row['postulante'];
+                $h->facultad=$row['facultad'];
+                $h->carrera=$row['carrera'];
+                $h->ficha_id=$request->ficha_id;
+                $h->save();
+            }
         }
         foreach ($request->familias as $row){
             $h=new Familia();

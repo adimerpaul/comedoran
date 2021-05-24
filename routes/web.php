@@ -38,16 +38,30 @@ Route::get('/registros', function () {
     return view('home');
 })->middleware('auth');
 
-Auth::routes();
-Route::apiResource('/comunicado',\App\Http\Controllers\ComunicadoController::class)->middleware('auth');
-Route::apiResource('/repostulante',\App\Http\Controllers\RepostulanteController::class)->middleware('auth');
-Route::apiResource('/nuevo',\App\Http\Controllers\NuevoController::class)->middleware('auth');
-Route::apiResource('/antiguo',\App\Http\Controllers\AntiguoController::class)->middleware('auth');
-Route::get('/buscar/{id}',[\App\Http\Controllers\AntiguoController::class,'buscar'])->middleware('auth');
 
-Route::apiResource('/ficha',\App\Http\Controllers\FichaController::class)->middleware('auth');
-Route::apiResource('/gestion',\App\Http\Controllers\GestionController::class)->middleware('auth');
-Route::get('/mostrar',[\App\Http\Controllers\ComunicadoController::class,'mostrar'])->middleware('auth');
-//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('auth')->$this->middleware('auth);
-Route::post('/guardar',[\App\Http\Controllers\FichaController::class,'guardar'])->middleware('auth');
-Route::post('/antiguog',[\App\Http\Controllers\AntiguoController::class,'store'])->middleware('auth');
+Auth::routes();
+Route::group(['middleware'=>'auth'],function (){
+    Route::apiResource('/comunicado',\App\Http\Controllers\ComunicadoController::class);
+    Route::apiResource('/repostulante',\App\Http\Controllers\RepostulanteController::class);
+    Route::apiResource('/nuevo',\App\Http\Controllers\NuevoController::class);
+    Route::apiResource('/antiguo',\App\Http\Controllers\AntiguoController::class);
+    Route::get('/buscar/{id}',[\App\Http\Controllers\AntiguoController::class,'buscar']);
+    Route::apiResource('/ficha',\App\Http\Controllers\FichaController::class);
+    Route::apiResource('/gestion',\App\Http\Controllers\GestionController::class);
+    Route::get('/mostrar',[\App\Http\Controllers\ComunicadoController::class,'mostrar']);
+    Route::post('/guardar',[\App\Http\Controllers\FichaController::class,'guardar']);
+    Route::post('/antiguog',[\App\Http\Controllers\AntiguoController::class,'store']);
+    Route::get('/revisarn',[\App\Http\Controllers\HomeController::class,'revisarn']);
+    Route::get('/revisara',[\App\Http\Controllers\HomeController::class,'revisara']);
+    Route::get('/revisarr',[\App\Http\Controllers\HomeController::class,'revisarr']);
+});
+
+
+
+
+
+
+
+
+
+

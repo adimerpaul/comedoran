@@ -11,4 +11,7 @@ class Antiguo extends Model
     public function user(){
         return $this->belongsTo(User::class)->with('ficha');
     }
+    public function ficha(){
+        return $this->belongsTo(Ficha::class);
+    }
 }

@@ -14,8 +14,8 @@ class GestionSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('gestions')->insert(['nombre'=>'II/2000','tipo'=>'NUEVOS','inicio'=>'2020-01-01','fin'=>'2020-12-31']);
-        DB::table('gestions')->insert(['nombre'=>'II/2000','tipo'=>'ANTIGUOS','inicio'=>'2020-01-01','fin'=>'2020-12-31']);
-        DB::table('gestions')->insert(['nombre'=>'II/2000','tipo'=>'REPOSTULANTES','inicio'=>'2020-01-01','fin'=>'2020-12-31']);
+        DB::table('gestions')->insert(['nombre'=>'II/2001','tipo'=>'NUEVOS','inicio'=>'2021-01-01','fin'=>'2021-12-31']);
+        DB::table('gestions')->insert(['nombre'=>'II/2001','tipo'=>'ANTIGUOS','inicio'=>'2021-01-01','fin'=>'2021-12-31']);
+        DB::table('gestions')->insert(['nombre'=>'II/2001','tipo'=>'REPOSTULANTES','inicio'=>'2021-01-01','fin'=>'2021-12-31']);
     }
 }
